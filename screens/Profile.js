@@ -1,28 +1,29 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import PageContainer from '../components/PageContainer'
 import {
-    MaterialIcons,
-    Feather,
-    EvilIcons,
-    Ionicons,
-    Entypo,
-    MaterialCommunityIcons,
     AntDesign,
+    Entypo,
+    EvilIcons,
+    Feather,
+    Ionicons,
+    MaterialCommunityIcons,
+    MaterialIcons,
 } from '@expo/vector-icons'
-import { COLORS, FONTS, SIZES, images } from '../constants'
 import * as Location from 'expo-location'
+import React, { useEffect, useState } from 'react'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+
+import PageContainer from '../components/PageContainer'
+import { COLORS, FONTS, SIZES, images } from '../constants'
 
 const Profile = ({ navigation }) => {
-    const [address, setAddress] = useState('Loading...')
+    const [address, setAddress] = useState('Carregando...')
     const [errorMsg, setErrorMsg] = useState(null)
 
     useEffect(() => {
         const getPermissions = async () => {
             let { status } = await Location.requestBackgroundPermissionsAsync()
             if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied')
+                setErrorMsg('Permissão para acessar localização foi negada')
                 return
             }
 
@@ -198,7 +199,7 @@ const Profile = ({ navigation }) => {
                     }}
                 >
                     <Text style={{ ...FONTS.h1 }}>A+</Text>
-                    <Text style={{ ...FONTS.body3 }}>Blood Type</Text>
+                    <Text style={{ ...FONTS.body3 }}>Tipo</Text>
                 </View>
                 <View
                     style={{
@@ -207,7 +208,7 @@ const Profile = ({ navigation }) => {
                     }}
                 >
                     <Text style={{ ...FONTS.h1 }}>05</Text>
-                    <Text style={{ ...FONTS.body3 }}>Donated</Text>
+                    <Text style={{ ...FONTS.body3 }}>Doações</Text>
                 </View>
                 <View
                     style={{
@@ -216,7 +217,7 @@ const Profile = ({ navigation }) => {
                     }}
                 >
                     <Text style={{ ...FONTS.h1 }}>02</Text>
-                    <Text style={{ ...FONTS.body3 }}>Requested</Text>
+                    <Text style={{ ...FONTS.body3 }}>Requisições</Text>
                 </View>
             </View>
         )
@@ -248,7 +249,7 @@ const Profile = ({ navigation }) => {
                             marginLeft: 24,
                         }}
                     >
-                        Available for Donate
+                        Disponível Para Doação
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -270,7 +271,7 @@ const Profile = ({ navigation }) => {
                             marginLeft: 24,
                         }}
                     >
-                        Invite a friend
+                        Convidar Um Amigo
                     </Text>
                 </TouchableOpacity>
 
@@ -289,7 +290,7 @@ const Profile = ({ navigation }) => {
                             marginLeft: 24,
                         }}
                     >
-                        Get help
+                        Obter ajuda
                     </Text>
                 </TouchableOpacity>
 
@@ -308,7 +309,7 @@ const Profile = ({ navigation }) => {
                             marginLeft: 24,
                         }}
                     >
-                        Logout
+                        Sair
                     </Text>
                 </TouchableOpacity>
             </View>

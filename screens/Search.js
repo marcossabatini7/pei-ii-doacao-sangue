@@ -1,26 +1,27 @@
 import {
-    View,
-    Text,
-    TouchableOpacity,
-    TextInput,
-    TouchableWithoutFeedback,
-    Modal,
-    Image,
-    FlatList,
-} from 'react-native'
-import React, { useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import PageContainer from '../components/PageContainer'
-import { COLORS, SIZES, FONTS, images, icons } from '../constants'
-import {
-    MaterialIcons,
-    Ionicons,
-    EvilIcons,
-    MaterialCommunityIcons,
     Entypo,
+    EvilIcons,
+    Ionicons,
+    MaterialCommunityIcons,
+    MaterialIcons,
 } from '@expo/vector-icons'
-import { donors } from '../constants/data'
+import React, { useState } from 'react'
+import {
+    FlatList,
+    Image,
+    Modal,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    View,
+} from 'react-native'
 import MapView from 'react-native-maps'
+import { SafeAreaView } from 'react-native-safe-area-context'
+
+import PageContainer from '../components/PageContainer'
+import { COLORS, FONTS, SIZES, icons, images } from '../constants'
+import { donors } from '../constants/data'
 
 const Search = ({ navigation }) => {
     const [search, setSearch] = useState('')
@@ -34,6 +35,7 @@ const Search = ({ navigation }) => {
         )
         setFilteredDonors(filteredData)
     }
+
     function renderHeader() {
         return (
             <View
@@ -60,7 +62,7 @@ const Search = ({ navigation }) => {
                         color={COLORS.black}
                     />
                 </TouchableOpacity>
-                <Text style={{ ...FONTS.h4 }}>Rearch</Text>
+                <Text style={{ ...FONTS.h4 }}>Pesquisar</Text>
             </View>
         )
     }
@@ -89,7 +91,7 @@ const Search = ({ navigation }) => {
                         height: '100%',
                         marginHorizontal: 12,
                     }}
-                    placeholder="Search"
+                    placeholder="Pesquisar"
                     value={search}
                     onChangeText={handleSearch}
                 />
@@ -265,7 +267,7 @@ const Search = ({ navigation }) => {
                                         marginTop: 24,
                                     }}
                                 >
-                                    Muhammed Sami
+                                    Marcos Sabatini
                                 </Text>
                                 <View
                                     style={{
@@ -284,7 +286,7 @@ const Search = ({ navigation }) => {
                                             marginLeft: 8,
                                         }}
                                     >
-                                        Mirpur 10, Dhaka
+                                        Rua 10, Guaçuí
                                     </Text>
                                 </View>
                             </View>
@@ -330,7 +332,7 @@ const Search = ({ navigation }) => {
                                                 color: COLORS.secondaryBlack,
                                             }}
                                         >
-                                            Times Donated
+                                            Doações Realizadas
                                         </Text>
                                     </View>
                                 </View>
@@ -359,7 +361,7 @@ const Search = ({ navigation }) => {
                                                 marginRight: 6,
                                             }}
                                         >
-                                            Blood Type
+                                            Tipo Sanguíneo
                                         </Text>
                                         <Text
                                             style={{
@@ -367,7 +369,7 @@ const Search = ({ navigation }) => {
                                                 color: COLORS.secondaryBlack,
                                             }}
                                         >
-                                            AB+
+                                            A+
                                         </Text>
                                     </View>
                                 </View>
@@ -405,7 +407,7 @@ const Search = ({ navigation }) => {
                                             marginLeft: 12,
                                         }}
                                     >
-                                        Call Now
+                                        Ligar Agora
                                     </Text>
                                 </TouchableOpacity>
 
@@ -433,7 +435,7 @@ const Search = ({ navigation }) => {
                                             marginLeft: 12,
                                         }}
                                     >
-                                        Call Now
+                                        Ligar Agora
                                     </Text>
                                 </TouchableOpacity>
                             </View>

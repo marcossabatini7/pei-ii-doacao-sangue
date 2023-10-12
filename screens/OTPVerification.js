@@ -1,10 +1,11 @@
-import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import PageContainer from '../components/PageContainer'
+import { Text, TouchableOpacity, View } from 'react-native'
 import OTPTextInput from 'react-native-otp-textinput'
-import { COLORS, FONTS, SIZES } from '../constants'
+import { SafeAreaView } from 'react-native-safe-area-context'
+
 import Button from '../components/Button'
+import PageContainer from '../components/PageContainer'
+import { COLORS, FONTS } from '../constants'
 
 const OTPVerification = ({ navigation }) => {
     return (
@@ -42,13 +43,13 @@ const OTPVerification = ({ navigation }) => {
                                     textAlign: 'right',
                                 }}
                             >
-                                Resend code
+                                Reenviar código
                             </Text>
                         </TouchableOpacity>
                     </View>
 
                     <Button
-                        title="VERIFY"
+                        title="VERIFICAR"
                         filled
                         onPress={() =>
                             navigation.navigate('SuccessVerification')

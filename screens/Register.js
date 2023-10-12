@@ -1,13 +1,14 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
+import { FontAwesome, Fontisto, MaterialIcons } from '@expo/vector-icons'
 import React, { useCallback, useReducer } from 'react'
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import PageContainer from '../components/PageContainer'
-import { FONTS, COLORS, SIZES, images } from '../constants'
-import { MaterialIcons, FontAwesome, Fontisto } from '@expo/vector-icons'
-import Input from '../components/Input'
+
 import Button from '../components/Button'
-import { reducer } from '../utils/reducers/formReducers'
+import Input from '../components/Input'
+import PageContainer from '../components/PageContainer'
+import { COLORS, FONTS, images } from '../constants'
 import { validateInput } from '../utils/actions/formActions'
+import { reducer } from '../utils/reducers/formReducers'
 
 const initialState = {
     inputValidities: {
@@ -84,7 +85,7 @@ const Register = ({ navigation }) => {
                                 errorText={
                                     formState.inputValidities['fullName']
                                 }
-                                placeholder="Enter your full name"
+                                placeholder="Informe seu nome completo"
                             />
                             <Input
                                 icon="email"
@@ -92,7 +93,7 @@ const Register = ({ navigation }) => {
                                 id="email"
                                 onInputChanged={inputChangedHandler}
                                 errorText={formState.inputValidities['email']}
-                                placeholder="Enter your email"
+                                placeholder="Informe seu e-mail"
                                 keyboardType="email-address"
                             />
                             <Input
@@ -104,7 +105,7 @@ const Register = ({ navigation }) => {
                                     formState.inputValidities['password']
                                 }
                                 autoCapitalize="none"
-                                placeholder="Enter your password"
+                                placeholder="Informe sua senha"
                                 secureTextEntry
                             />
                             <Input
@@ -115,7 +116,7 @@ const Register = ({ navigation }) => {
                                 errorText={
                                     formState.inputValidities['phoneNumber']
                                 }
-                                placeholder="Enter your phone number"
+                                placeholder="Informe seu telefone"
                             />
 
                             <Input
@@ -126,7 +127,7 @@ const Register = ({ navigation }) => {
                                 errorText={
                                     formState.inputValidities['bloodType']
                                 }
-                                placeholder="Enter your blood type"
+                                placeholder="Informe seu tipo sanguíneo"
                             />
 
                             <Input
@@ -137,7 +138,7 @@ const Register = ({ navigation }) => {
                                 errorText={
                                     formState.inputValidities['location']
                                 }
-                                placeholder="Enter your location"
+                                placeholder="Informe sua localização"
                             />
                         </View>
                         <Button
@@ -161,7 +162,7 @@ const Register = ({ navigation }) => {
                                     color: COLORS.black,
                                 }}
                             >
-                                Already have an account ?{' '}
+                                Já possui uma conta?{' '}
                             </Text>
 
                             <TouchableOpacity

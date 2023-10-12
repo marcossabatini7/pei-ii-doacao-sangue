@@ -1,13 +1,14 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React, { useCallback, useReducer } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import PageContainer from '../components/PageContainer'
-import { COLORS, FONTS, SIZES, images } from '../constants'
 import { MaterialIcons } from '@expo/vector-icons'
-import Input from '../components/Input'
+import React, { useCallback, useReducer } from 'react'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+
 import Button from '../components/Button'
-import { reducer } from '../utils/reducers/formReducers'
+import Input from '../components/Input'
+import PageContainer from '../components/PageContainer'
+import { COLORS, FONTS, images } from '../constants'
 import { validateInput } from '../utils/actions/formActions'
+import { reducer } from '../utils/reducers/formReducers'
 
 const initialState = {
     inputValidities: {
@@ -54,7 +55,7 @@ const ResetPassword = ({ navigation }) => {
                         }}
                     >
                         <Text style={{ ...FONTS.h2, color: COLORS.primary }}>
-                            Reset
+                            Redefinir
                         </Text>
                         <Text
                             style={{
@@ -63,10 +64,10 @@ const ResetPassword = ({ navigation }) => {
                                 marginHorizontal: 8,
                             }}
                         >
-                            Your
+                            Sua
                         </Text>
                         <Text style={{ ...FONTS.h2, color: COLORS.primary }}>
-                            Password
+                            Senha
                         </Text>
                     </View>
 
@@ -77,7 +78,7 @@ const ResetPassword = ({ navigation }) => {
                             id="email"
                             onInputChanged={inputChangedHandler}
                             errorText={formState.inputValidities['email']}
-                            placeholder="Enter your email"
+                            placeholder="Informe seu e-mail"
                             keyboardType="email-address"
                         />
                     </View>
@@ -88,8 +89,7 @@ const ResetPassword = ({ navigation }) => {
                             marginVertical: 14,
                         }}
                     >
-                        Your password reset will be sent in your registered
-                        email
+                        Sua redefinição de senha será enviada no seu e-mail cadastrado
                     </Text>
                     <Button
                         title="SEND"
@@ -110,7 +110,7 @@ const ResetPassword = ({ navigation }) => {
                                 marginVertical: 12,
                             }}
                         >
-                            Remenber Password
+                            Lembrar Senha
                         </Text>
                     </TouchableOpacity>
                 </View>

@@ -1,9 +1,10 @@
-import { View, Text, Image } from 'react-native'
 import React from 'react'
+import { Image, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+
+import Button from '../components/Button'
 import PageContainer from '../components/PageContainer'
 import { images } from '../constants'
-import Button from '../components/Button'
 
 // Let's validate the forms
 const SuccessVerification = ({ navigation }) => {
@@ -26,7 +27,7 @@ const SuccessVerification = ({ navigation }) => {
                         }}
                     />
                     <Button
-                        title="FINISH"
+                        title="FINALIZAR"
                         filled
                         onPress={() =>
                             navigation.navigate('BottomTabNavigation')

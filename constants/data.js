@@ -1,45 +1,45 @@
-import { images, icons } from '../constants'
+import { icons, images } from '../constants'
 
 export const donors = [
     {
         id: '1',
         image: images.user1,
-        name: 'Yasin Hossain',
-        location: 'Mohammedpur',
+        name: 'João Silva',
+        location: 'Vitória',
         bloodType: 'A+',
     },
     {
         id: '2',
         image: images.user2,
-        name: 'Mohammed Sami',
-        location: 'Mirpur 10, Dhaka',
+        name: 'Maria da Silva',
+        location: 'Cachoeiro de Itapemirim',
         bloodType: 'AB+',
     },
     {
         id: '3',
         image: images.user3,
-        name: 'Rahimun Islam',
-        location: 'Chittagong',
+        name: 'Romário Romeu',
+        location: 'Serra',
         bloodType: 'B-',
     },
     {
         id: '4',
         image: images.user4,
-        name: 'Rumana',
-        location: 'Lakshmipur',
+        name: 'João José',
+        location: 'Vitória',
         bloodType: 'O+',
     },
     {
         id: '5',
         image: images.user5,
-        name: 'Jubayer Ahmed',
-        location: 'Mohammedpur, Dhaka',
+        name: 'Carolina Aparecida',
+        location: 'Carapina, Serra',
         bloodType: 'A+',
     },
     {
         id: '6',
         image: images.user6,
-        name: 'Edward Lio',
+        name: 'Lucas Enzo',
         location: 'Mohammedpur, Dhaka',
         bloodType: 'B+',
     },
@@ -48,7 +48,7 @@ export const donors = [
 export const categories = [
     {
         icon: icons.categoryIcon1,
-        title: 'Find Donors',
+        title: 'Encontre Doadores',
     },
     {
         icon: icons.categoryIcon2,
@@ -56,51 +56,51 @@ export const categories = [
     },
     {
         icon: icons.categoryIcon3,
-        title: 'Order Blood',
+        title: 'Solicitar Doação',
     },
     {
         icon: icons.categoryIcon4,
-        title: 'Assistant',
+        title: 'Assistente',
     },
     {
         icon: icons.categoryIcon5,
-        title: 'Report',
+        title: 'Relatório',
     },
     {
         icon: icons.categoryIcon6,
-        title: 'Campain',
+        title: 'Campanha',
     },
 ]
 
 export const donationRequests = [
     {
-        name: 'Amir Hamza',
-        location: 'Apollo Hospital',
+        name: 'Carlos Enzo',
+        location: 'Vila Velha Hospital',
         postedDate: '5 min',
     },
     {
-        name: 'Amir Hamza',
-        location: 'Apollo Hospital',
+        name: 'Carlos Enzo',
+        location: 'Vila Velha Hospital',
         postedDate: '5 min',
     },
     {
-        name: 'Amir Hamza',
-        location: 'Apollo Hospital',
+        name: 'Carlos Enzo',
+        location: 'Vila Velha Hospital',
         postedDate: '5 min',
     },
     {
-        name: 'Amir Hamza',
-        location: 'Apollo Hospital',
+        name: 'Carlos Enzo',
+        location: 'Vila Velha Hospital',
         postedDate: '5 min',
     },
     {
-        name: 'Amir Hamza',
-        location: 'Apollo Hospital',
+        name: 'Carlos Enzo',
+        location: 'Vila Velha Hospital',
         postedDate: '5 min',
     },
     {
-        name: 'Amir Hamza',
-        location: 'Apollo Hospital',
+        name: 'Carlos Enzo',
+        location: 'Vila Velha Hospital',
         postedDate: '5 min',
     },
 ]
@@ -108,15 +108,16 @@ export const donationRequests = [
 export const features = [
     {
         id: '1',
-        substance: 'Glucose',
+        substance: 'Glicose',
         volume: '6 mmol/L',
     },
     {
         id: '2',
-        substance: 'Cholesterol',
+        substance: 'Colesterol',
         volume: '6.2 mmol/L',
     },
     {
+        //  TODO: O QUE É Bilirubin?
         id: '3',
         substance: 'Bilirubin',
         volume: '12 mmol/L',
@@ -134,6 +135,6 @@ export const features = [
     {
         id: '6',
         substance: '276 bL',
-        volume: 'Platelets',
+        volume: 'Plaquetas',
     },
 ]

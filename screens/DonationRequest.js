@@ -1,11 +1,12 @@
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import PageContainer from '../components/PageContainer'
-import { COLORS, SIZES, FONTS } from '../constants'
 import { MaterialIcons } from '@expo/vector-icons'
-import { donationRequests } from '../constants/data'
+import React from 'react'
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+
 import DonationCard from '../components/DonationCard'
+import PageContainer from '../components/PageContainer'
+import { COLORS, FONTS } from '../constants'
+import { donationRequests } from '../constants/data'
 
 const DonationRequest = ({ navigation }) => {
     function renderHeader() {
@@ -34,7 +35,7 @@ const DonationRequest = ({ navigation }) => {
                         color={COLORS.black}
                     />
                 </TouchableOpacity>
-                <Text style={{ ...FONTS.h4 }}>Donation Request</Text>
+                <Text style={{ ...FONTS.h4 }}>Requisição de Doação</Text>
             </View>
         )
     }
@@ -42,9 +43,9 @@ const DonationRequest = ({ navigation }) => {
     function renderContent() {
         return (
             <ScrollView>
-                {donationRequests.map((donationRequest, index) => (
+                {donationRequests.map((donationRequest) => (
                     <DonationCard
-                        key={index}
+                        key={donationRequest.name}
                         name={donationRequest.name}
                         location={donationRequest.location}
                         postedDate={donationRequest.postedDate}

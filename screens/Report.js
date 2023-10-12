@@ -1,11 +1,12 @@
-import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native'
+import { EvilIcons, MaterialIcons } from '@expo/vector-icons'
 import React from 'react'
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import PageContainer from '../components/PageContainer'
-import { COLORS, SIZES, FONTS, images } from '../constants'
-import { MaterialIcons, EvilIcons } from '@expo/vector-icons'
-import { features } from '../constants/data'
+
 import Button from '../components/Button'
+import PageContainer from '../components/PageContainer'
+import { COLORS, FONTS, SIZES, images } from '../constants'
+import { features } from '../constants/data'
 
 const Report = ({ navigation }) => {
     const renderItem = ({ item, index }) => (

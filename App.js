@@ -1,5 +1,10 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { useFonts } from 'expo-font'
+import * as SplashScreen from 'expo-splash-screen'
+import { useCallback, useEffect, useState } from 'react'
+import BottomTabNavigation from './navigation/BottomTabNavigation'
 import {
     GetStarted,
     Home,
@@ -10,11 +15,6 @@ import {
     ResetPassword,
     SuccessVerification,
 } from './screens'
-import { useFonts } from 'expo-font'
-import * as SplashScreen from 'expo-splash-screen'
-import { useCallback, useEffect, useState } from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import BottomTabNavigation from './navigation/BottomTabNavigation'
 
 SplashScreen.preventAutoHideAsync()
 const Stack = createNativeStackNavigator()

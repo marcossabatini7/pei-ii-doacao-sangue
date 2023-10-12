@@ -11,12 +11,12 @@ export const validateString = (id, value) => {
         constraints.format = {
             pattern: '[a-z]+',
             flags: 'i',
-            message: 'Value can only contain letters',
+            message: 'O valor só pode conter letras',
         }
     }
 
     const validationResult = validate({ [id]: value }, { [id]: constraints })
-    return validationResult && validationResult[id]
+    return validationResult?.id
 }
 
 export const validateEmail = (id, value) => {
@@ -31,7 +31,7 @@ export const validateEmail = (id, value) => {
     }
 
     const validationResult = validate({ [id]: value }, { [id]: constraints })
-    return validationResult && validationResult[id]
+    return validationResult?.id
 }
 
 export const validatePassword = (id, value) => {
@@ -44,10 +44,10 @@ export const validatePassword = (id, value) => {
     if (value !== '') {
         constraints.length = {
             minimum: 6,
-            message: 'must be at least 6 characters',
+            message: 'deve ter pelo menos 6 caracteres',
         }
     }
 
     const validationResult = validate({ [id]: value }, { [id]: constraints })
-    return validationResult && validationResult[id]
+    return validationResult?.id
 }

@@ -1,11 +1,12 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
-import { COLORS, SIZES, FONTS } from '../constants'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 import Slideshow from 'react-native-image-slider-show'
-import { categories } from '../constants/data'
+import { SafeAreaView } from 'react-native-safe-area-context'
+
 import DonationCard from '../components/DonationCard'
+import { COLORS, FONTS, SIZES } from '../constants'
+import { categories } from '../constants/data'
 
 const Home = () => {
     const [position, setPosition] = useState(0)
@@ -21,7 +22,7 @@ const Home = () => {
     useEffect(() => {
         const toggle = setInterval(() => {
             setPosition(position === dataSource.length - 1 ? 0 : position + 1)
-        }, 1000)
+        }, 5000)
 
         return () => clearInterval(toggle)
     })
@@ -90,9 +91,9 @@ const Home = () => {
                     flexWrap: 'wrap',
                 }}
             >
-                {categories.map((category, index) => (
+                {categories.map((category) => (
                     <TouchableOpacity
-                        key={index}
+                        key={category.title}
                         style={{
                             height: 120,
                             width: 110,
@@ -138,12 +139,12 @@ const Home = () => {
                         color: COLORS.secondaryBlack,
                     }}
                 >
-                    Donation request
+                    Requisição de doação
                 </Text>
                 <DonationCard
-                    name="Amir Hamza"
-                    location="Hertford Dritish Hospital"
-                    bloodType="B+"
+                    name="Marcos Sabatini"
+                    location="Hospital Evangélico de Cachoeiro de Itapemirim"
+                    bloodType="A+"
                     postedDate="5 min"
                     onPress={() => console.log('Pressed')}
                 />

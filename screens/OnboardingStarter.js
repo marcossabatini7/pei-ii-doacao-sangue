@@ -1,5 +1,5 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 import Onboarding from 'react-native-onboarding-swiper'
 
 const Dots = ({ selected }) => {
@@ -44,7 +44,7 @@ const OnboardingStarter = ({ navigation }) => {
                             source={require('../assets/images/onboarding_1.png')}
                         />
                     ),
-                    title: 'Find Blood Donors',
+                    title: 'Encontre doadores',
                     subtitle:
                         'Lorem ipsum dolor set maet Lorem ipsum dolor set maet Lorem ipsum dolor set maet ',
                 },
@@ -55,7 +55,7 @@ const OnboardingStarter = ({ navigation }) => {
                             source={require('../assets/images/onboarding_2.png')}
                         />
                     ),
-                    title: 'Find Blood Donors',
+                    title: 'Encontre doadores',
                     subtitle:
                         'Lorem ipsum dolor set maet Lorem ipsum dolor set maet Lorem ipsum dolor set maet ',
                 },

@@ -1,13 +1,14 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons'
 import React, { useCallback, useReducer } from 'react'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import PageContainer from '../components/PageContainer'
-import { COLORS, images, FONTS, SIZES } from '../constants'
-import { MaterialIcons, FontAwesome } from '@expo/vector-icons'
-import Input from '../components/Input'
+
 import Button from '../components/Button'
-import { reducer } from '../utils/reducers/formReducers'
+import Input from '../components/Input'
+import PageContainer from '../components/PageContainer'
+import { COLORS, FONTS, images } from '../constants'
 import { validateInput } from '../utils/actions/formActions'
+import { reducer } from '../utils/reducers/formReducers'
 
 const initialState = {
     inputValidities: {
@@ -80,7 +81,7 @@ const Login = ({ navigation }) => {
                             id="email"
                             onInputChanged={inputChangedHandler}
                             errorText={formState.inputValidities['email']}
-                            placeholder="Enter your email"
+                            placeholder="Informe seu e-mail"
                             keyboardType="email-address"
                         />
                         <Input
@@ -90,7 +91,7 @@ const Login = ({ navigation }) => {
                             onInputChanged={inputChangedHandler}
                             errorText={formState.inputValidities['password']}
                             autoCapitalize="none"
-                            placeholder="Enter your password"
+                            placeholder="Informe sua senha"
                             secureTextEntry
                         />
                     </View>
@@ -112,7 +113,7 @@ const Login = ({ navigation }) => {
                                 marginVertical: 12,
                             }}
                         >
-                            Forgot Password
+                            Esqueci Minha Senha
                         </Text>
                     </TouchableOpacity>
 
@@ -128,7 +129,7 @@ const Login = ({ navigation }) => {
                                 color: COLORS.black,
                             }}
                         >
-                            Don't have an account ?{' '}
+                            Não possui conta?{' '}
                         </Text>
 
                         <TouchableOpacity
@@ -140,7 +141,7 @@ const Login = ({ navigation }) => {
                                     color: COLORS.primary,
                                 }}
                             >
-                                Register
+                                Registrar
                             </Text>
                         </TouchableOpacity>
                     </View>
