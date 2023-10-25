@@ -65,7 +65,7 @@ const GetStarted = ({ navigation }) => {
                     }}
                 />
                 <Button
-                    title="REGISTER"
+                    title="REGISTRAR"
                     onPress={() => navigation.navigate('Register')}
                     filled
                     style={{

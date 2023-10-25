@@ -142,7 +142,7 @@ const Register = ({ navigation }) => {
                             />
                         </View>
                         <Button
-                            title="REGISTER"
+                            title="REGISTRAR"
                             filled
                             onPress={() => navigation.navigate('Home')}
                             style={{
