@@ -80,10 +80,10 @@ const Register = ({ navigation }) => {
                             <Input
                                 icon="user"
                                 iconPack={FontAwesome}
-                                id="fullName"
+                                id="name"
                                 onInputChanged={inputChangedHandler}
                                 errorText={
-                                    formState.inputValidities['fullName']
+                                    formState.inputValidities['name']
                                 }
                                 placeholder="Informe seu nome completo"
                             />

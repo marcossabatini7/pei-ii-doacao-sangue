@@ -6,15 +6,15 @@
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
-    "@elysiajs/swagger": "^0.7.3",
+    "@elysiajs/cookie": "^0.7.0",
+    "@elysiajs/jwt": "^0.7.0",
+    "@elysiajs/swagger": "^0.7.4",
+    "@prisma/client": "^5.5.2",
     "elysia": "latest"
   },
   "devDependencies": {
     "bun-types": "latest",
-    "eslint": "^8.52.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "prettier": "^3.0.3"
+    "prisma": "^5.5.2"
   },
   "module": "src/index.js"
 }
