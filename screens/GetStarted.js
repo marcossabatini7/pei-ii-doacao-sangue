@@ -8,7 +8,9 @@ import { COLORS, FONTS, SIZES, images } from '../constants'
 
 const GetStarted = ({ navigation }) => {
     async function login() {
+        await AsyncStorage.removeItem('user')
         const user = await AsyncStorage.getItem('user')
+
         if (user) {
             navigation.navigate('Home')
             return

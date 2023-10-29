@@ -110,6 +110,13 @@ export const auth = (app: Elysia) =>
                         },
                         select: {
                             id: true,
+                            name: true,
+                            email: true,
+                            bloodType: true,
+                            location: true,
+                            username: true,
+                            profileImage: true,
+                            phoneNumber: true,
                             hash: true,
                             salt: true,
                         },
@@ -120,7 +127,7 @@ export const auth = (app: Elysia) =>
                         return {
                             success: false,
                             data: null,
-                            message: "Invalid credentials",
+                            message: "Credenciais inválidas!",
                         };
                     }
 
@@ -131,7 +138,7 @@ export const auth = (app: Elysia) =>
                         return {
                             success: false,
                             data: null,
-                            message: "Invalid credentials",
+                            message: "Credenciais inválidas!",
                         };
                     }
 
@@ -149,8 +156,16 @@ export const auth = (app: Elysia) =>
 
                     return {
                         success: true,
-                        data: null,
-                        message: "Account login successfully",
+                        data: {
+                            name: user.name,
+                            email: user.email,
+                            bloodType: user.bloodType,
+                            location: user.location,
+                            username: user.username,
+                            profileImage: user.profileImage,
+                            phoneNumber: user.phoneNumber,
+                        },
+                        message: "Login realizado com sucesso!",
                     };
                 },
                 {
@@ -165,7 +180,7 @@ export const auth = (app: Elysia) =>
             .get("/me", ({ user }) => {
                 return {
                     success: true,
-                    message: "Fetch authenticated user details",
+                    message: "Detalhes do usuário",
                     data: {
                         user,
                     },
