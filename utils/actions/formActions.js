@@ -6,7 +6,7 @@ import {
 
 export const validateInput = (inputId, inputValue) => {
     if (
-        inputId === 'fullName' ||
+        inputId === 'name' ||
         inputId === 'bloodType' ||
         inputId === 'location' ||
         inputId === 'phoneNumber'

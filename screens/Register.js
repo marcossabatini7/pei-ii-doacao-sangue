@@ -1,6 +1,7 @@
 import { FontAwesome, Fontisto, MaterialIcons } from '@expo/vector-icons'
-import React, { useCallback, useReducer } from 'react'
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import React, { useCallback, useReducer, useTransition } from 'react'
+import { Image, ScrollView, Text, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import Button from '../components/Button'
@@ -20,14 +21,46 @@ const initialState = {
 
 const Register = ({ navigation }) => {
     const [formState, dispatchFormState] = useReducer(reducer, initialState)
+    const [isPending, startTransition] = useTransition()
 
     const inputChangedHandler = useCallback(
         (inputId, inputValue) => {
             const result = validateInput(inputId, inputValue)
-            dispatchFormState({ inputId, validationResult: result })
+            dispatchFormState({ inputId, validationResult: result, inputValue })
         },
         [dispatchFormState]
     )
+
+    const register = useCallback(async () => {
+        if (!formState.formIsValid) {
+            return ToastAndroid.show('Formulário inválido!', ToastAndroid.BOTTOM)
+        }
+
+        startTransition(() => {
+            fetch('http://10.3.152.15:8080/api/auth/signup', {
+                method: 'post',
+                body: JSON.stringify(formState.inputValues),
+                headers: {
+                    "Content-Type": "application/json",
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            })
+                .then(async (r) => {
+                    const user = await r.json()
+                    if (r.ok) {
+                        ToastAndroid.show(user.message ?? 'Conta criada com sucesso!', ToastAndroid.BOTTOM)
+                        user?.data?.user && await AsyncStorage.setItem('user', JSON.stringify(user?.data?.user))
+                        navigation.navigate('Home')
+                    }
+
+                    ToastAndroid.show(user.message ?? 'Erro ao realizar o cadastro', ToastAndroid.BOTTOM)
+                })
+                .catch((e) => {
+                    console.log(e)
+                    ToastAndroid.show('Erro ao realizar o cadastro', ToastAndroid.BOTTOM)
+                })
+        })
+    }, [formState.formIsValid, formState.inputValues, navigation])
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -144,10 +177,11 @@ const Register = ({ navigation }) => {
                         <Button
                             title="REGISTRAR"
                             filled
-                            onPress={() => navigation.navigate('Home')}
+                            onPress={() => register(navigation)}
                             style={{
                                 width: '100%',
                             }}
+                            isLoading={isPending}
                         />
 
                         <View

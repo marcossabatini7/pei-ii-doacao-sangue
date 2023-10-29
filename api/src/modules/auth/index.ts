@@ -9,7 +9,9 @@ export const auth = (app: Elysia) =>
             .post(
                 "/signup",
                 async ({ body, set }) => {
-                    const { email, name, password, username, bloodType, phoneNumber } = body;
+                    const { email, name, password, bloodType, phoneNumber } = body;
+                    const username = name.trim().toLowerCase().replace(' ', '_')
+
                     // validate duplicate email address
                     const emailExists = await prisma.user.findUnique({
                         where: {
@@ -24,7 +26,7 @@ export const auth = (app: Elysia) =>
                         return {
                             success: false,
                             data: null,
-                            message: "Email address already in use.",
+                            message: "Endereço de e-mail em uso.",
                         };
                     }
 
@@ -43,7 +45,7 @@ export const auth = (app: Elysia) =>
                         return {
                             success: false,
                             data: null,
-                            message: "Someone already taken this username.",
+                            message: "Nome do usuário em uso.",
                         };
                     }
 
@@ -73,7 +75,7 @@ export const auth = (app: Elysia) =>
 
                     return {
                         success: true,
-                        message: "Account created",
+                        message: "Conta criada com sucesso!",
                         data: {
                             user: newUser,
                         },
@@ -83,11 +85,10 @@ export const auth = (app: Elysia) =>
                     body: t.Object({
                         name: t.String(),
                         email: t.String(),
-                        username: t.String(),
                         password: t.String(),
                         phoneNumber: t.String(),
                         bloodType: t.String(),
-                        location: t.String(),
+                        location: t.Optional(t.String()),
                     }),
                 }
             )

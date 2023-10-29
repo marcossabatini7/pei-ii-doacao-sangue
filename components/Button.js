@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { Feather } from '@expo/vector-icons'
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { COLORS, FONTS, SIZES } from '../constants'
 
 const Button = (props) => {
@@ -18,14 +18,28 @@ const Button = (props) => {
             }}
             onPress={props.onPress}
         >
-            <Text
+            <View
                 style={{
-                    ...FONTS.body2,
-                    ...{ color: textColor },
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: 10
                 }}
             >
-                {props.title}
-            </Text>
+                {props.isLoading && <Feather
+                    name="loader"
+                    size={24}
+                    color={COLORS.white}
+                />
+                }
+                <Text
+                    style={{
+                        ...FONTS.body2,
+                        ...{ color: textColor },
+                    }}
+                >
+                    {props.title}
+                </Text>
+            </View>
         </TouchableOpacity>
     )
 }
