@@ -1,12 +1,14 @@
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useCallback, useReducer } from 'react'
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { Image, Text, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import Button from '../components/Button'
 import Input from '../components/Input'
 import PageContainer from '../components/PageContainer'
 import { COLORS, FONTS, images } from '../constants'
+import useFetch from '../hooks/useFetch'
 import { validateInput } from '../utils/actions/formActions'
 import { reducer } from '../utils/reducers/formReducers'
 
@@ -17,16 +19,40 @@ const initialState = {
     },
     formIsValid: false,
 }
+
 const Login = ({ navigation }) => {
     const [formState, dispatchFormState] = useReducer(reducer, initialState)
+    const fetchLogin = useFetch({
+        path: '/auth/login',
+        body: {
+            username: formState?.inputValues?.email,
+            password: formState?.inputValues?.password
+        },
+        method: 'post',
+        cb: async (res) => {
+            res?.data && await AsyncStorage.setItem('user', JSON.stringify(res?.data))
+            navigation.navigate('Home')
+        },
+        ecb: (err) => {
+            ToastAndroid.show(err ?? 'Erro ao realizar o login!', ToastAndroid.BOTTOM)
+        }
+    })
 
     const inputChangedHandler = useCallback(
         (inputId, inputValue) => {
             const result = validateInput(inputId, inputValue)
-            dispatchFormState({ inputId, validationResult: result })
+            dispatchFormState({ inputId, validationResult: result, inputValue })
         },
         [dispatchFormState]
     )
+
+    async function login() {
+        if (formState.formIsValid) {
+            fetchLogin.call()
+            return
+        }
+        ToastAndroid.show('Preencha o formulário corretamente!', ToastAndroid.BOTTOM)
+    }
 
     return (
         <SafeAreaView
@@ -98,7 +124,7 @@ const Login = ({ navigation }) => {
                     <Button
                         title="LOGIN"
                         filled
-                        onPress={() => navigation.navigate('Register')}
+                        onPress={login}
                         style={{
                             width: '100%',
                         }}
