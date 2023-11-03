@@ -8,7 +8,7 @@ import DonationCard from '../components/DonationCard'
 import { COLORS, FONTS, SIZES } from '../constants'
 import { categories } from '../constants/data'
 
-const Home = () => {
+const Home = ({ navigation }) => {
     const [position, setPosition] = useState(0)
     const [dataSource, setDataSource] = useState([
         {
@@ -22,7 +22,7 @@ const Home = () => {
     useEffect(() => {
         const toggle = setInterval(() => {
             setPosition(position === dataSource.length - 1 ? 0 : position + 1)
-        }, 5000)
+        }, 10000)
 
         return () => clearInterval(toggle)
     })
@@ -105,6 +105,7 @@ const Home = () => {
                             justifyContent: 'center',
                             marginBottom: 22,
                         }}
+                        onPressIn={() => navigation.navigate(category.page)}
                     >
                         <Image
                             source={category.icon}

@@ -3,6 +3,7 @@ import { jwt } from "@elysiajs/jwt";
 import { swagger } from '@elysiajs/swagger';
 import Elysia from "elysia";
 import { auth } from "~modules/auth";
+import { campaign } from "~modules/campaign";
 
 const app = new Elysia()
   .use(
@@ -27,6 +28,7 @@ const app = new Elysia()
       )
       .use(cookie())
       .use(auth)
+      .use(campaign)
   )
   .listen(8080);
 

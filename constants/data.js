@@ -49,26 +49,32 @@ export const categories = [
     {
         icon: icons.categoryIcon1,
         title: 'Encontre Doadores',
+        page: ''
     },
     {
         icon: icons.categoryIcon2,
-        title: 'Donates',
+        title: 'Doações',
+        page: ''
     },
     {
         icon: icons.categoryIcon3,
         title: 'Solicitar Doação',
+        page: 'DonationRequest'
     },
     {
         icon: icons.categoryIcon4,
         title: 'Assistente',
+        page: ''
     },
     {
         icon: icons.categoryIcon5,
         title: 'Relatório',
+        page: ''
     },
     {
         icon: icons.categoryIcon6,
         title: 'Campanha',
+        page: 'Campaign'
     },
 ]
 

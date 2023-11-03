@@ -66,6 +66,7 @@ export const auth = (app: Elysia) =>
                             phoneNumber
                         },
                         select: {
+                            id: true,
                             name: true,
                             email: true,
                             username: true,
@@ -157,6 +158,7 @@ export const auth = (app: Elysia) =>
                     return {
                         success: true,
                         data: {
+                            id: user.id,
                             name: user.name,
                             email: user.email,
                             bloodType: user.bloodType,

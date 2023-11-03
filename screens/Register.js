@@ -42,7 +42,6 @@ const Register = ({ navigation }) => {
                 body: JSON.stringify(formState.inputValues),
                 headers: {
                     "Content-Type": "application/json",
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
                 }
             })
                 .then(async (r) => {
