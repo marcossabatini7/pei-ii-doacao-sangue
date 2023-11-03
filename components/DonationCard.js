@@ -1,8 +1,6 @@
-import { View, Text } from 'react-native'
 import React from 'react'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { COLORS, FONTS, SIZES, icons } from '../constants'
-import { Image } from 'react-native'
-import { TouchableOpacity } from 'react-native'
 
 const DonationCard = (props) => {
     return (
@@ -36,7 +34,7 @@ const DonationCard = (props) => {
                         marginVertical: 2,
                     }}
                 >
-                    Name
+                    Nome
                 </Text>
                 <Text
                     style={{
@@ -54,7 +52,7 @@ const DonationCard = (props) => {
                         marginVertical: 2,
                     }}
                 >
-                    Location
+                    Local
                 </Text>
                 <Text
                     style={{
@@ -92,7 +90,7 @@ const DonationCard = (props) => {
                             color: COLORS.primary,
                         }}
                     >
-                        Donate
+                        Doação
                     </Text>
                 </TouchableOpacity>
             </View>

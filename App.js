@@ -6,6 +6,7 @@ import * as SplashScreen from 'expo-splash-screen'
 import { useCallback, useEffect, useState } from 'react'
 import BottomTabNavigation from './navigation/BottomTabNavigation'
 import {
+    DonationRequest,
     GetStarted,
     Home,
     Login,
@@ -15,6 +16,7 @@ import {
     ResetPassword,
     SuccessVerification,
 } from './screens'
+import Campaign from './screens/Campaign'
 
 SplashScreen.preventAutoHideAsync()
 const Stack = createNativeStackNavigator()
@@ -117,6 +119,20 @@ export default function App() {
                 <Stack.Screen
                     name="GetStarted"
                     component={GetStarted}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="Campaign"
+                    component={Campaign}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="DonationRequest"
+                    component={DonationRequest}
                     options={{
                         headerShown: false,
                     }}

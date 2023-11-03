@@ -1,6 +1,6 @@
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import React, { useCallback, useReducer } from 'react'
+import React, { useCallback, useEffect, useReducer } from 'react'
 import { Image, Text, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -53,6 +53,15 @@ const Login = ({ navigation }) => {
         }
         ToastAndroid.show('Preencha o formulário corretamente!', ToastAndroid.BOTTOM)
     }
+
+    useEffect(() => {
+        AsyncStorage.getItem('user').then((user) => {
+            console.log(user)
+            if (user) {
+                navigation.navigate('Home')
+            }
+        })
+    }, [AsyncStorage, navigation])
 
     return (
         <SafeAreaView
