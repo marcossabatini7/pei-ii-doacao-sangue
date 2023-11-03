@@ -2,6 +2,17 @@ import React from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { COLORS, FONTS, SIZES, icons } from '../constants'
 
+const bloodIcons = {
+    'a+': icons.aplusIcon,
+    'a-': icons.aminusIcon,
+    'b+': icons.bplusIcon,
+    'b-': icons.bminusIcon,
+    'ab+': icons.abplusIcon,
+    'ab-': icons.abminusIcon,
+    'o+': icons.oplusIcon,
+    'o-': icons.ominusIcon,
+}
+
 const DonationCard = (props) => {
     return (
         <View
@@ -76,7 +87,7 @@ const DonationCard = (props) => {
                 }}
             >
                 <Image
-                    source={icons.bplusIcon}
+                    source={bloodIcons[props.bloodType]}
                     resizeMode="contain"
                     style={{
                         marginBottom: 32,

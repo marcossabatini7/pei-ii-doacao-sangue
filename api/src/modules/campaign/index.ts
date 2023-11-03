@@ -70,14 +70,40 @@ export const campaign = (app: Elysia) =>
                     }
                 )
                 .get(
-                    "/",
-                    async ({ body, set }) => {
+                    "/:page",
+                    async ({ params, set }) => {
+                        const { page } = params;
+                        const skip = !!page ? (page - 1) * 3 : 1
+                        console.log({ page, skip })
 
+                        const campaigns = await prisma.campaign.findMany({
+                            skip,
+                            take: 3,
+                            select: {
+                                id: true,
+                                bloodType: true,
+                                createdAt: true,
+                                location: true,
+                                name: true,
+                                phoneNumber: true,
+                                expirationDate: true
+                            },
+                            orderBy: {
+                                expirationDate: 'desc'
+                            }
+                        });
+
+                        console.log(campaigns)
+
+                        return {
+                            success: true,
+                            message: `Listagem de campanhas da página ${page}`,
+                            data: campaigns,
+                        };
                     },
                     {
-                        body: t.Object({
-                            username: t.String(),
-                            password: t.String(),
+                        params: t.Object({
+                            page: t.Numeric(),
                         }),
                     }
                 )

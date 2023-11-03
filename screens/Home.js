@@ -1,6 +1,6 @@
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
-import React, { useEffect, useState } from 'react'
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import React, { useCallback, useEffect, useState, useTransition } from 'react'
+import { Button, Image, Text, TouchableOpacity, View } from 'react-native'
 import Slideshow from 'react-native-image-slider-show'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -131,6 +131,40 @@ const Home = ({ navigation }) => {
     }
 
     function renderDonationCard() {
+        console.log('renderDonationCard')
+        const [page, setPage] = useState(1)
+        const [campaigns, setCampaigns] = useState([])
+        const [isPending, startTransition] = useTransition()
+
+        const fetchCampains = useCallback(() => {
+            startTransition(() => {
+                fetch(`http://10.3.152.15:8080/api/campaign/${page ?? 1}`, {
+                    method: 'get',
+                })
+                    .then(async (r) => {
+                        console.log(r)
+                        const { data, message } = await r.json()
+                        console.log(JSON.stringify(data, null, 2))
+                        if (r.ok) {
+                            // setPage((p) => p + 1)
+                            setCampaigns(data)
+                        }
+                    })
+                    .catch((e) => {
+
+                    })
+            })
+        }, [page, setPage, setCampaigns])
+
+        useEffect(() => {
+            fetchCampains()
+
+            return () => {
+                console.log('clear campaigns')
+                setCampaigns([])
+            }
+        }, [])
+
         return (
             <View>
                 <Text
@@ -139,16 +173,27 @@ const Home = ({ navigation }) => {
                         fontWeight: 'bold',
                         color: COLORS.secondaryBlack,
                     }}
-                >
-                    Requisição de doação
-                </Text>
-                <DonationCard
-                    name="Marcos Sabatini"
-                    location="Hospital Evangélico de Cachoeiro de Itapemirim"
-                    bloodType="A+"
-                    postedDate="5 min"
-                    onPress={() => console.log('Pressed')}
-                />
+                >Últimas campanhas</Text>
+                {!isPending && campaigns?.length ? <>
+                    {campaigns?.map((c) => (
+                        <DonationCard
+                            key={c?.id}
+                            name={c?.name}
+                            location={c?.location}
+                            bloodType={c?.bloodType?.toLowerCase()}
+                            postedDate="5 min"
+                            onPress={() => console.log('Pressed')}
+                        />
+                    ))}
+                </> : null}
+                {!isPending && campaigns?.length ? <Button
+                    title="Carregar Mais"
+                    onPress={() => fetchCampains()}
+                    style={{
+                        width: '100%',
+                        marginBottom: SIZES.padding,
+                    }}
+                /> : null}
             </View>
         )
     }
