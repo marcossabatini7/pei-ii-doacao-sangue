@@ -1,12 +1,22 @@
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import React, { useCallback, useEffect, useState, useTransition } from 'react'
-import { Button, Image, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, ScrollView, Share, Text, TouchableOpacity, View } from 'react-native'
 import Slideshow from 'react-native-image-slider-show'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
+import Button from '../components/Button'
 import DonationCard from '../components/DonationCard'
 import { COLORS, FONTS, SIZES } from '../constants'
 import { categories } from '../constants/data'
+// import { relativeDateFormatter } from "../utils/date"
+import differenceInDays from 'date-fns/differenceInDays'
+
+const bloodTypes = {
+    a: '🅰️',
+    b: '🅱️',
+    ab: '🆎',
+    o: '🅾️'
+}
 
 const Home = ({ navigation }) => {
     const [position, setPosition] = useState(0)
@@ -131,10 +141,33 @@ const Home = ({ navigation }) => {
     }
 
     function renderDonationCard() {
-        console.log('renderDonationCard')
         const [page, setPage] = useState(1)
         const [campaigns, setCampaigns] = useState([])
         const [isPending, startTransition] = useTransition()
+
+        async function shareCampaign(campaign) {
+            try {
+                const bloodType = `${campaign.bloodType}`
+                    .toLowerCase()
+                    .replace('+', '')
+                    .replace('-', '')
+                const result = await Share.share({
+                    message:
+                        `*Campanha de Doação de Sangue* ❣️\n\n🗓️ *Campanha:* ${campaign.name}\n${bloodTypes[bloodType]} *Tipo sanguíneo:* ${campaign.bloodType}\n📞 *Telefone para contato:* ${campaign.phoneNumber}\n📌 *Local de coleta:* ${campaign.location}`,
+                });
+                if (result.action === Share.sharedAction) {
+                    if (result.activityType) {
+                        // shared with activity type of result.activityType
+                    } else {
+                        // shared
+                    }
+                } else if (result.action === Share.dismissedAction) {
+                    // dismissed
+                }
+            } catch (error) {
+                Alert.alert(error.message);
+            }
+        }
 
         const fetchCampains = useCallback(() => {
             startTransition(() => {
@@ -142,12 +175,10 @@ const Home = ({ navigation }) => {
                     method: 'get',
                 })
                     .then(async (r) => {
-                        console.log(r)
                         const { data, message } = await r.json()
-                        console.log(JSON.stringify(data, null, 2))
                         if (r.ok) {
-                            // setPage((p) => p + 1)
-                            setCampaigns(data)
+                            setPage((p) => p + 1)
+                            setCampaigns((c) => [...c, ...data])
                         }
                     })
                     .catch((e) => {
@@ -160,13 +191,12 @@ const Home = ({ navigation }) => {
             fetchCampains()
 
             return () => {
-                console.log('clear campaigns')
                 setCampaigns([])
             }
         }, [])
 
         return (
-            <View>
+            <ScrollView>
                 <Text
                     style={{
                         ...FONTS.body3,
@@ -175,16 +205,21 @@ const Home = ({ navigation }) => {
                     }}
                 >Últimas campanhas</Text>
                 {!isPending && campaigns?.length ? <>
-                    {campaigns?.map((c) => (
-                        <DonationCard
+                    {campaigns?.map((c) => {
+                        console.log(new Date())
+                        console.log(new Date(c.createdAt))
+                        console.log('---')
+                        const postedDate = differenceInDays(new Date(), new Date(c.createdAt));
+
+                        return (<DonationCard
                             key={c?.id}
                             name={c?.name}
                             location={c?.location}
                             bloodType={c?.bloodType?.toLowerCase()}
-                            postedDate="5 min"
-                            onPress={() => console.log('Pressed')}
-                        />
-                    ))}
+                            postedDate={postedDate}
+                            onPress={() => shareCampaign(c)}
+                        />)
+                    })}
                 </> : null}
                 {!isPending && campaigns?.length ? <Button
                     title="Carregar Mais"
@@ -194,17 +229,19 @@ const Home = ({ navigation }) => {
                         marginBottom: SIZES.padding,
                     }}
                 /> : null}
-            </View>
+            </ScrollView>
         )
     }
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
-            <View style={{ marginHorizontal: 22 }}>
-                {renderHeader()}
-                {renderSliderBanner()}
-                {renderFeatures()}
-                {renderDonationCard()}
-            </View>
+            <ScrollView>
+                <View style={{ marginHorizontal: 22 }}>
+                    {renderHeader()}
+                    {/* {renderSliderBanner()} */}
+                    {renderFeatures()}
+                    {renderDonationCard()}
+                </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }

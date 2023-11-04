@@ -13,6 +13,11 @@ const bloodIcons = {
     'o-': icons.ominusIcon,
 }
 
+const postDayDiff = {
+    '0': 'Hoje',
+    '1': 'Ontem'
+}
+
 const DonationCard = (props) => {
     return (
         <View
@@ -75,8 +80,17 @@ const DonationCard = (props) => {
                 >
                     {props.location}
                 </Text>
+                <Text
+                    style={{
+                        fontSize: 14,
+                        color: COLORS.secondaryBlack,
+                        marginVertical: 2,
+                    }}
+                >
+                    Solicitado
+                </Text>
                 <Text style={{ ...FONTS.body4, color: COLORS.black }}>
-                    {props.postedDate}
+                    {props.postedDate in postDayDiff ? postDayDiff[props.postedDate] : `Há ${props.postedDate} dias`}
                 </Text>
             </View>
 
@@ -101,7 +115,7 @@ const DonationCard = (props) => {
                             color: COLORS.primary,
                         }}
                     >
-                        Doação
+                        Compartilhar
                     </Text>
                 </TouchableOpacity>
             </View>

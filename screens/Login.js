@@ -73,6 +73,7 @@ const Login = ({ navigation }) => {
                 navigation.navigate('Home')
             }
         })
+        navigation.navigate('Home')
     }, [AsyncStorage, navigation])
 
     return (

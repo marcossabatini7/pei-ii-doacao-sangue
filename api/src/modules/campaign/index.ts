@@ -73,7 +73,7 @@ export const campaign = (app: Elysia) =>
                     "/:page",
                     async ({ params, set }) => {
                         const { page } = params;
-                        const skip = !!page ? (page - 1) * 3 : 1
+                        const skip = !!page ? (page - 1) * 3 : 0
                         console.log({ page, skip })
 
                         const campaigns = await prisma.campaign.findMany({
