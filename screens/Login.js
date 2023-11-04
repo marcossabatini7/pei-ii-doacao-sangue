@@ -1,6 +1,6 @@
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import React, { useCallback, useEffect, useReducer } from 'react'
+import React, { useCallback, useEffect, useReducer, useTransition } from 'react'
 import { Image, Text, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -8,7 +8,6 @@ import Button from '../components/Button'
 import Input from '../components/Input'
 import PageContainer from '../components/PageContainer'
 import { COLORS, FONTS, images } from '../constants'
-import useFetch from '../hooks/useFetch'
 import { validateInput } from '../utils/actions/formActions'
 import { reducer } from '../utils/reducers/formReducers'
 
@@ -22,21 +21,7 @@ const initialState = {
 
 const Login = ({ navigation }) => {
     const [formState, dispatchFormState] = useReducer(reducer, initialState)
-    const fetchLogin = useFetch({
-        path: '/auth/login',
-        body: {
-            username: formState?.inputValues?.email,
-            password: formState?.inputValues?.password
-        },
-        method: 'post',
-        cb: async (res) => {
-            res?.data && await AsyncStorage.setItem('user', JSON.stringify(res?.data))
-            navigation.navigate('Home')
-        },
-        ecb: (err) => {
-            ToastAndroid.show(err ?? 'Erro ao realizar o login!', ToastAndroid.BOTTOM)
-        }
-    })
+    const [isPending, startTransition] = useTransition()
 
     const inputChangedHandler = useCallback(
         (inputId, inputValue) => {
@@ -46,21 +31,49 @@ const Login = ({ navigation }) => {
         [dispatchFormState]
     )
 
-    async function login() {
-        if (formState.formIsValid) {
-            fetchLogin.call()
-            return
+    const login = useCallback(async () => {
+        if (!formState.formIsValid) {
+            return ToastAndroid.show('Formulário inválido!', ToastAndroid.BOTTOM)
         }
-        ToastAndroid.show('Preencha o formulário corretamente!', ToastAndroid.BOTTOM)
-    }
+
+        const user = JSON.parse(await AsyncStorage.getItem('user'))
+
+        startTransition(() => {
+            fetch('http://10.3.152.15:8080/api/auth/login', {
+                method: 'post',
+                body: JSON.stringify({
+                    username: formState?.inputValues?.email,
+                    password: formState?.inputValues?.password
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+                .then(async (r) => {
+                    const { data, message } = await r.json()
+                    console.log(JSON.stringify(data, null, 2))
+                    if (r.ok) {
+                        await AsyncStorage.setItem('user', JSON.stringify(data))
+                        ToastAndroid.show(message ?? 'Login realizado com sucesso!', ToastAndroid.BOTTOM)
+                        navigation.navigate('Home')
+                    }
+
+                    ToastAndroid.show(message ?? 'Erro ao realizar o login', ToastAndroid.BOTTOM)
+                })
+                .catch((e) => {
+                    ToastAndroid.show('Erro ao realizar o login', ToastAndroid.BOTTOM)
+                })
+        })
+    }, [formState.formIsValid, formState.inputValues])
 
     useEffect(() => {
         AsyncStorage.getItem('user').then((user) => {
-            console.log(user)
+            console.log({ user })
             if (user) {
                 navigation.navigate('Home')
             }
         })
+        navigation.navigate('Home')
     }, [AsyncStorage, navigation])
 
     return (

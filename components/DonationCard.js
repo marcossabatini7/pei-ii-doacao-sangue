@@ -2,6 +2,22 @@ import React from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { COLORS, FONTS, SIZES, icons } from '../constants'
 
+const bloodIcons = {
+    'a+': icons.aplusIcon,
+    'a-': icons.aminusIcon,
+    'b+': icons.bplusIcon,
+    'b-': icons.bminusIcon,
+    'ab+': icons.abplusIcon,
+    'ab-': icons.abminusIcon,
+    'o+': icons.oplusIcon,
+    'o-': icons.ominusIcon,
+}
+
+const postDayDiff = {
+    '0': 'Hoje',
+    '1': 'Ontem'
+}
+
 const DonationCard = (props) => {
     return (
         <View
@@ -64,8 +80,17 @@ const DonationCard = (props) => {
                 >
                     {props.location}
                 </Text>
+                <Text
+                    style={{
+                        fontSize: 14,
+                        color: COLORS.secondaryBlack,
+                        marginVertical: 2,
+                    }}
+                >
+                    Solicitado
+                </Text>
                 <Text style={{ ...FONTS.body4, color: COLORS.black }}>
-                    {props.postedDate}
+                    {props.postedDate in postDayDiff ? postDayDiff[props.postedDate] : `Há ${props.postedDate} dias`}
                 </Text>
             </View>
 
@@ -76,7 +101,7 @@ const DonationCard = (props) => {
                 }}
             >
                 <Image
-                    source={icons.bplusIcon}
+                    source={bloodIcons[props.bloodType]}
                     resizeMode="contain"
                     style={{
                         marginBottom: 32,
@@ -90,7 +115,7 @@ const DonationCard = (props) => {
                             color: COLORS.primary,
                         }}
                     >
-                        Doação
+                        Compartilhar
                     </Text>
                 </TouchableOpacity>
             </View>
