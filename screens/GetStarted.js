@@ -8,7 +8,6 @@ import { COLORS, FONTS, SIZES, images } from '../constants'
 
 const GetStarted = ({ navigation }) => {
     async function login() {
-        await AsyncStorage.removeItem('user')
         const user = await AsyncStorage.getItem('user')
 
         if (user) {
@@ -45,9 +44,6 @@ const GetStarted = ({ navigation }) => {
                         alignItems: 'center',
                     }}
                 >
-                    <Text style={{ ...FONTS.h1, color: COLORS.primary }}>
-                        Dare
-                    </Text>
                     <Text
                         style={{
                             ...FONTS.h1,
@@ -55,10 +51,10 @@ const GetStarted = ({ navigation }) => {
                             marginHorizontal: 8,
                         }}
                     >
-                        To
+                        Doe
                     </Text>
                     <Text style={{ ...FONTS.h1, color: COLORS.primary }}>
-                        Donate
+                        Sangue
                     </Text>
                 </View>
 

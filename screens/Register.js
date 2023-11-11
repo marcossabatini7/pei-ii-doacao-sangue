@@ -37,7 +37,7 @@ const Register = ({ navigation }) => {
         }
 
         startTransition(() => {
-            fetch('http://10.3.152.15:8080/api/auth/signup', {
+            fetch('http://10.3.152.15:8080/api/v1/auth/register', {
                 method: 'post',
                 body: JSON.stringify(formState.inputValues),
                 headers: {
@@ -45,14 +45,18 @@ const Register = ({ navigation }) => {
                 }
             })
                 .then(async (r) => {
-                    const user = await r.json()
+                    const { errors, message, ...rest } = await r.json()
+                    console.log({ errors, message })
+
                     if (r.ok) {
-                        ToastAndroid.show(user.message ?? 'Conta criada com sucesso!', ToastAndroid.BOTTOM)
-                        user?.data?.user && await AsyncStorage.setItem('user', JSON.stringify(user?.data?.user))
+                        ToastAndroid.show(message ?? 'Conta criada com sucesso!', ToastAndroid.BOTTOM)
+                        rest?.data?.user && await AsyncStorage.setItem('user', JSON.stringify(rest?.data?.user))
                         navigation.navigate('Home')
                     }
 
-                    ToastAndroid.show(user.message ?? 'Erro ao realizar o cadastro', ToastAndroid.BOTTOM)
+                    const errorValidation = errors ? Object.keys(errors).map((k) => errors[k][0]).at(0) : null
+
+                    ToastAndroid.show(errorValidation ?? message ?? 'Erro ao realizar o cadastro', ToastAndroid.BOTTOM)
                 })
                 .catch((e) => {
                     console.log(e)
@@ -88,23 +92,18 @@ const Register = ({ navigation }) => {
                             }}
                         >
                             <Text
-                                style={{ ...FONTS.h1, color: COLORS.primary }}
-                            >
-                                Dare
-                            </Text>
-                            <Text
                                 style={{
                                     ...FONTS.h1,
                                     color: COLORS.black,
                                     marginHorizontal: 8,
                                 }}
                             >
-                                To
+                                Doe
                             </Text>
                             <Text
                                 style={{ ...FONTS.h1, color: COLORS.primary }}
                             >
-                                Donate
+                                Sangue
                             </Text>
                         </View>
 

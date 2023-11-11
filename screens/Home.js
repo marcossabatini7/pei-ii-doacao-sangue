@@ -1,4 +1,5 @@
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useCallback, useEffect, useState, useTransition } from 'react'
 import { Alert, Image, ScrollView, Share, Text, TouchableOpacity, View } from 'react-native'
 import Slideshow from 'react-native-image-slider-show'
@@ -169,23 +170,36 @@ const Home = ({ navigation }) => {
             }
         }
 
-        const fetchCampains = useCallback(() => {
+        const fetchCampains = useCallback(async () => {
+            const userString = await AsyncStorage.getItem('user')
+
+            if (!userString) {
+                navigation.navigate('Login')
+            }
+
+            const user = JSON.parse(userString)
+
             startTransition(() => {
-                fetch(`http://10.3.152.15:8080/api/campaign/${page ?? 1}`, {
+                fetch(`http://10.3.152.15:8080/api/v1/campaign?page=${page ?? 1}`, {
                     method: 'get',
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': `Bearer ${user?.token}`
+                    }
                 })
                     .then(async (r) => {
-                        const { data, message } = await r.json()
+                        const { data } = await r.json()
+
                         if (r.ok) {
-                            setPage((p) => p + 1)
                             setCampaigns((c) => [...c, ...data])
+                            setPage((p) => p + 1)
                         }
                     })
                     .catch((e) => {
-
+                        console.log(e)
                     })
             })
-        }, [page, setPage, setCampaigns])
+        }, [page, setCampaigns])
 
         useEffect(() => {
             fetchCampains()
@@ -206,10 +220,9 @@ const Home = ({ navigation }) => {
                 >Últimas campanhas</Text>
                 {!isPending && campaigns?.length ? <>
                     {campaigns?.map((c) => {
-                        console.log(new Date())
-                        console.log(new Date(c.createdAt))
                         console.log('---')
-                        const postedDate = differenceInDays(new Date(), new Date(c.createdAt));
+                        console.log(new Date())
+                        const postedDate = differenceInDays(new Date(), new Date(c.created_at));
 
                         return (<DonationCard
                             key={c?.id}

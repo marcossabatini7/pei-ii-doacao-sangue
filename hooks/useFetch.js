@@ -1,6 +1,6 @@
 import { useTransition } from 'react'
 
-const baseURL = process.env.BASE_URL ?? 'http://10.3.152.15:8080/api'
+const baseURL = process.env.BASE_URL ?? 'http://10.3.152.15:8000/api'
 
 function useFetch({ path, body, cb, ecb, method = 'get' }) {
     const [isPending, startTransition] = useTransition()
