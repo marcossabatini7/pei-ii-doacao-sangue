@@ -13,17 +13,12 @@ const bloodIcons = {
     'o-': icons.ominusIcon,
 }
 
-const postDayDiff = {
-    '0': 'Hoje',
-    '1': 'Ontem'
-}
-
 const DonationCard = (props) => {
     return (
         <View
             style={{
                 width: SIZES.width - 44,
-                height: 148,
+                height: 115,
                 borderRadius: SIZES.padding,
                 backgroundColor: COLORS.white,
                 flexDirection: 'row',
@@ -61,37 +56,27 @@ const DonationCard = (props) => {
                 >
                     {props.name}
                 </Text>
-                <Text
-                    style={{
-                        fontSize: 14,
-                        color: COLORS.secondaryBlack,
-                        marginVertical: 2,
-                    }}
-                >
-                    Local
-                </Text>
-                <Text
-                    style={{
-                        fontSize: 14,
-                        color: COLORS.black,
-                        fontWeight: 500,
-                        marginVertical: 2,
-                    }}
-                >
-                    {props.location}
-                </Text>
-                <Text
-                    style={{
-                        fontSize: 14,
-                        color: COLORS.secondaryBlack,
-                        marginVertical: 2,
-                    }}
-                >
-                    Solicitado
-                </Text>
-                <Text style={{ ...FONTS.body4, color: COLORS.black }}>
-                    {props.postedDate in postDayDiff ? postDayDiff[props.postedDate] : `Há ${props.postedDate} dias`}
-                </Text>
+                {props?.location ? <>
+                    <Text
+                        style={{
+                            fontSize: 14,
+                            color: COLORS.secondaryBlack,
+                            marginVertical: 2,
+                        }}
+                    >
+                        Local
+                    </Text>
+                    <Text
+                        style={{
+                            fontSize: 14,
+                            color: COLORS.black,
+                            fontWeight: 500,
+                            marginVertical: 2,
+                        }}
+                    >
+                        {props.location}
+                    </Text>
+                </> : null}
             </View>
 
             <View
@@ -115,7 +100,7 @@ const DonationCard = (props) => {
                             color: COLORS.primary,
                         }}
                     >
-                        Compartilhar
+                        Solicitar
                     </Text>
                 </TouchableOpacity>
             </View>

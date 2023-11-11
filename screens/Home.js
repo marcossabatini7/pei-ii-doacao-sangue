@@ -5,12 +5,11 @@ import { Alert, Image, ScrollView, Share, Text, TouchableOpacity, View } from 'r
 import Slideshow from 'react-native-image-slider-show'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
+import differenceInDays from 'date-fns/differenceInDays'
 import Button from '../components/Button'
 import DonationCard from '../components/DonationCard'
 import { COLORS, FONTS, SIZES } from '../constants'
 import { categories } from '../constants/data'
-// import { relativeDateFormatter } from "../utils/date"
-import differenceInDays from 'date-fns/differenceInDays'
 
 const bloodTypes = {
     a: '🅰️',
@@ -220,8 +219,6 @@ const Home = ({ navigation }) => {
                 >Últimas campanhas</Text>
                 {!isPending && campaigns?.length ? <>
                     {campaigns?.map((c) => {
-                        console.log('---')
-                        console.log(new Date())
                         const postedDate = differenceInDays(new Date(), new Date(c.created_at));
 
                         return (<DonationCard

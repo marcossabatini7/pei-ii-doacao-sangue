@@ -47,9 +47,14 @@ export const donors = [
 
 export const categories = [
     {
+        icon: icons.categoryIcon6,
+        title: 'Campanha',
+        page: 'Campaign'
+    },
+    {
         icon: icons.categoryIcon1,
         title: 'Encontre Doadores',
-        page: ''
+        page: 'DonationRequest'
     },
     {
         icon: icons.categoryIcon2,
@@ -59,7 +64,7 @@ export const categories = [
     {
         icon: icons.categoryIcon3,
         title: 'Solicitar Doação',
-        page: 'DonationRequest'
+        page: ''
     },
     {
         icon: icons.categoryIcon4,
@@ -70,11 +75,6 @@ export const categories = [
         icon: icons.categoryIcon5,
         title: 'Relatório',
         page: ''
-    },
-    {
-        icon: icons.categoryIcon6,
-        title: 'Campanha',
-        page: 'Campaign'
     },
 ]
 
