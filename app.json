@@ -1,38 +1,47 @@
 {
-    "expo": {
-        "name": "DoeSangue",
-        "slug": "DoeSangue",
-        "version": "1.0.0",
-        "orientation": "portrait",
-        "icon": "./assets/images/icon.png",
-        "userInterfaceStyle": "light",
-        "splash": {
-            "image": "./assets/images/splash.png",
-            "resizeMode": "cover",
-            "backgroundColor": "#FF2156"
-        },
-        "assetBundlePatterns": [
-            "**/*"
-        ],
-        "ios": {
-            "supportsTablet": true
-        },
-        "android": {
-            "adaptiveIcon": {
-                "foregroundImage": "./assets/images/adaptive-icon.png",
-                "backgroundColor": "#ffffff"
-            }
-        },
-        "web": {
-            "favicon": "./assets/images/favicon.png"
-        },
-        "plugins": [
-            [
-                "expo-contacts",
-                {
-                    "contactsPermission": "Permitir que $(PRODUCT_NAME) acesse seus contatos."
-                }
-            ]
-        ]
-    }
+  "expo": {
+    "name": "DoeSangue",
+    "slug": "DoeSangue",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#FF2156"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSContactsUsageDescription": "Permitir que $(PRODUCT_NAME) acesse seus contatos."
+      },
+      "bundleIdentifier": "com.doesangue"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "android.permission.READ_CONTACTS",
+        "android.permission.WRITE_CONTACTS"
+      ],
+      "package": "com.doesangue"
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-contacts",
+        {
+          "contactsPermission": "Permitir que $(PRODUCT_NAME) acesse seus contatos."
+        }
+      ]
+    ]
+  }
 }
