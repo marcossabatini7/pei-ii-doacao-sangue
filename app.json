@@ -1,7 +1,7 @@
 {
     "expo": {
-        "name": "BloodDonate",
-        "slug": "BloodDonate",
+        "name": "DoeSangue",
+        "slug": "DoeSangue",
         "version": "1.0.0",
         "orientation": "portrait",
         "icon": "./assets/images/icon.png",
@@ -11,7 +11,9 @@
             "resizeMode": "cover",
             "backgroundColor": "#FF2156"
         },
-        "assetBundlePatterns": ["**/*"],
+        "assetBundlePatterns": [
+            "**/*"
+        ],
         "ios": {
             "supportsTablet": true
         },
@@ -23,6 +25,14 @@
         },
         "web": {
             "favicon": "./assets/images/favicon.png"
-        }
+        },
+        "plugins": [
+            [
+                "expo-contacts",
+                {
+                    "contactsPermission": "Permitir que $(PRODUCT_NAME) acesse seus contatos."
+                }
+            ]
+        ]
     }
 }
