@@ -8,6 +8,7 @@ import Button from '../components/Button'
 import Input from '../components/Input'
 import PageContainer from '../components/PageContainer'
 import { COLORS, FONTS, images } from '../constants'
+import { BASE_URL } from "../constants/api"
 import { validateInput } from '../utils/actions/formActions'
 import { reducer } from '../utils/reducers/formReducers'
 
@@ -37,7 +38,7 @@ const Login = ({ navigation }) => {
         }
 
         startTransition(() => {
-            fetch('http://10.3.152.15:8080/api/v1/auth/login', {
+            fetch(`${BASE_URL}/api/v1/auth/login`, {
                 method: 'post',
                 body: JSON.stringify({
                     email: formState?.inputValues?.email,

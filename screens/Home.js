@@ -9,6 +9,7 @@ import differenceInDays from 'date-fns/differenceInDays'
 import Button from '../components/Button'
 import DonationCard from '../components/DonationCard'
 import { COLORS, FONTS, SIZES } from '../constants'
+import { BASE_URL } from "../constants/api"
 import { categories } from '../constants/data'
 
 const bloodTypes = {
@@ -179,7 +180,7 @@ const Home = ({ navigation }) => {
             const user = JSON.parse(userString)
 
             startTransition(() => {
-                fetch(`http://10.3.152.15:8080/api/v1/campaign?page=${page ?? 1}`, {
+                fetch(`${BASE_URL}/api/v1/campaign?page=${page ?? 1}`, {
                     method: 'get',
                     headers: {
                         "Content-Type": "application/json",

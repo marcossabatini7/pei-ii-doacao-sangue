@@ -8,6 +8,7 @@ import Button from '../components/Button'
 import Input from '../components/Input'
 import PageContainer from '../components/PageContainer'
 import { COLORS, FONTS, images } from '../constants'
+import { BASE_URL } from "../constants/api"
 import { validateInput } from '../utils/actions/formActions'
 import { reducer } from '../utils/reducers/formReducers'
 
@@ -37,7 +38,7 @@ const Register = ({ navigation }) => {
         }
 
         startTransition(() => {
-            fetch('http://10.3.152.15:8080/api/v1/auth/register', {
+            fetch(`${BASE_URL}/api/v1/auth/register`, {
                 method: 'post',
                 body: JSON.stringify(formState.inputValues),
                 headers: {

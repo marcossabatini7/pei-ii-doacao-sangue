@@ -9,6 +9,7 @@ import DonationCard from '../components/DonationCard'
 import Input from '../components/Input'
 import PageContainer from '../components/PageContainer'
 import { COLORS, FONTS } from '../constants'
+import { BASE_URL } from "../constants/api"
 import { validateInput } from '../utils/actions/campaignFormActions'
 import { reducer } from '../utils/reducers/formReducers'
 
@@ -52,7 +53,7 @@ const DonationRequest = ({ navigation }) => {
         const bloodType = formState?.inputValues?.bloodType.toUpperCase() ?? '';
 
         startTransition(() => {
-            fetch(encodeURI(`http://10.3.152.15:8080/api/v1/donor?name=${name}&bloodType=${bloodType}`), {
+            fetch(encodeURI(`${BASE_URL}/api/v1/donor?name=${name}&bloodType=${bloodType}`), {
                 method: 'get',
                 headers: {
                     "Content-Type": "application/json",

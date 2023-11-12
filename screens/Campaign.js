@@ -8,6 +8,7 @@ import Button from '../components/Button'
 import Input from '../components/Input'
 import PageContainer from '../components/PageContainer'
 import { COLORS, FONTS } from '../constants'
+import { BASE_URL } from "../constants/api"
 import { validateInput } from '../utils/actions/campaignFormActions'
 import { reducer } from '../utils/reducers/formReducers'
 
@@ -53,7 +54,7 @@ const Campaign = ({ navigation }) => {
         }
 
         startTransition(() => {
-            fetch('http://10.3.152.15:8080/api/v1/campaign', {
+            fetch(`${BASE_URL}/api/v1/campaign`, {
                 method: 'post',
                 body: JSON.stringify({
                     name: formState?.inputValues?.name,
