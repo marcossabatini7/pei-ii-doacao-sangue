@@ -3,6 +3,7 @@ import React from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
+import Divider from '../components/Divider'
 import PageContainer from '../components/PageContainer'
 import Paragraph from '../components/Paragraph'
 import RedCard from '../components/RedCard'
@@ -78,9 +79,16 @@ const CanIDonate = ({ navigation }) => {
                             }}
                         />
 
+                        <Divider />
                         <Subtitle text="Requisitos para doação" />
 
-                        <Paragraph text="Vamos esclarecer tudo para que você possa contribuir de maneira tranquila e consciente." />
+                        <View
+                            style={{
+                                marginBottom: 20
+                            }}
+                        >
+                            <Paragraph text="Vamos esclarecer tudo para que você possa contribuir de maneira tranquila e consciente." />
+                        </View>
 
                         <Topic
                             title='Idade: Uma Janela de Oportunidade para Todos'
