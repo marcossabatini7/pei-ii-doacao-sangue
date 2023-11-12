@@ -71,11 +71,6 @@ export const categories = [
         title: 'Perfil',
         page: ''
     },
-    {
-        icon: icons.categoryIcon3,
-        title: 'Sair',
-        page: ''
-    },
 ]
 
 export const donationRequests = [

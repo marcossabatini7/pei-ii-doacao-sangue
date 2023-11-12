@@ -8,7 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import differenceInDays from 'date-fns/differenceInDays'
 import Button from '../components/Button'
 import DonationCard from '../components/DonationCard'
-import { COLORS, FONTS, SIZES } from '../constants'
+import { COLORS, FONTS, SIZES, icons } from '../constants'
 import { BASE_URL } from "../constants/api"
 import { categories } from '../constants/data'
 
@@ -37,6 +37,27 @@ const Home = ({ navigation }) => {
 
         return () => clearInterval(toggle)
     })
+
+    async function logout() {
+        const user = JSON.parse(await AsyncStorage.getItem('user'))
+
+        if (!user) {
+            navigation.navigate('Login')
+        }
+
+        fetch(`${BASE_URL}/api/v1/logout`, {
+            method: 'post',
+            headers: {
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${user?.token}`
+                }
+            }
+        }).then(async () => {
+            await AsyncStorage.removeItem('user')
+            navigation.navigate('Login')
+        })
+    }
 
     function renderHeader() {
         return (
@@ -137,6 +158,39 @@ const Home = ({ navigation }) => {
                         </Text>
                     </TouchableOpacity>
                 ))}
+                <TouchableOpacity
+                    key='sair'
+                    style={{
+                        height: 120,
+                        width: 110,
+                        borderColor: COLORS.secondaryWhite,
+                        borderWidth: 2,
+                        backgroundColor: COLORS.white,
+                        borderRadius: 10,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginBottom: 22,
+                    }}
+                    onPressIn={() => logout()}
+                >
+                    <Image
+                        source={icons.categoryIcon3}
+                        resizeMode="contain"
+                        style={{
+                            height: 40,
+                            width: 40,
+                            marginVertical: 12,
+                        }}
+                    />
+                    <Text
+                        style={{
+                            ...FONTS.body3,
+                            color: COLORS.secondaryBlack,
+                        }}
+                    >
+                        Sair
+                    </Text>
+                </TouchableOpacity>
             </View>
         )
     }
