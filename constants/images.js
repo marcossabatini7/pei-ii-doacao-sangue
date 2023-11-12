@@ -3,13 +3,10 @@ const logo = require('../assets/images/logo.png')
 const pana = require('../assets/images/pana.png')
 const secureBlood = require('../assets/images/secure_blood.png')
 const success = require('../assets/images/success.png')
-const user1 = require('../assets/images/users/user1.jpg')
-const user2 = require('../assets/images/users/user2.jpg')
-const user3 = require('../assets/images/users/user3.jpg')
-const user4 = require('../assets/images/users/user4.jpg')
-const user5 = require('../assets/images/users/user5.jpg')
-const user6 = require('../assets/images/users/user6.jpg')
-const user7 = require('../assets/images/users/user7.jpg')
+const canIDonate1 = require('../assets/images/can_i_donate1.png')
+const canIDonate2 = require('../assets/images/can_i_donate2.png')
+const redCardTopic = require('../assets/images/red_card_topic.png')
+const transpCardTopic = require('../assets/images/transp_card_topic.png')
 
 export default {
     hero,
@@ -17,11 +14,8 @@ export default {
     pana,
     secureBlood,
     success,
-    user1,
-    user2,
-    user3,
-    user4,
-    user5,
-    user6,
-    user7,
+    canIDonate1,
+    canIDonate2,
+    redCardTopic,
+    transpCardTopic
 }

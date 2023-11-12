@@ -1,4 +1,3 @@
-import React from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { COLORS, FONTS, SIZES, icons } from '../constants'
 

@@ -3,42 +3,42 @@ import { icons, images } from '../constants'
 export const donors = [
     {
         id: '1',
-        image: images.user1,
+        image: images.logo,
         name: 'João Silva',
         location: 'Vitória',
         bloodType: 'A+',
     },
     {
         id: '2',
-        image: images.user2,
+        image: images.logo,
         name: 'Maria da Silva',
         location: 'Cachoeiro de Itapemirim',
         bloodType: 'AB+',
     },
     {
         id: '3',
-        image: images.user3,
+        image: images.logo,
         name: 'Romário Romeu',
         location: 'Serra',
         bloodType: 'B-',
     },
     {
         id: '4',
-        image: images.user4,
+        image: images.logo,
         name: 'João José',
         location: 'Vitória',
         bloodType: 'O+',
     },
     {
         id: '5',
-        image: images.user5,
+        image: images.logo,
         name: 'Carolina Aparecida',
         location: 'Carapina, Serra',
         bloodType: 'A+',
     },
     {
         id: '6',
-        image: images.user6,
+        image: images.logo,
         name: 'Lucas Enzo',
         location: 'Mohammedpur, Dhaka',
         bloodType: 'B+',
@@ -57,23 +57,23 @@ export const categories = [
         page: 'DonationRequest'
     },
     {
+        icon: icons.categoryIcon4,
+        title: 'Posso doar?',
+        page: 'CanIDonate'
+    },
+    {
         icon: icons.categoryIcon2,
-        title: 'Doações',
+        title: 'Saiba mais',
+        page: 'SeeMore'
+    },
+    {
+        icon: icons.categoryIcon5,
+        title: 'Perfil',
         page: ''
     },
     {
         icon: icons.categoryIcon3,
-        title: 'Solicitar Doação',
-        page: ''
-    },
-    {
-        icon: icons.categoryIcon4,
-        title: 'Assistente',
-        page: ''
-    },
-    {
-        icon: icons.categoryIcon5,
-        title: 'Relatório',
+        title: 'Sair',
         page: ''
     },
 ]
