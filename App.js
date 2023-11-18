@@ -6,6 +6,7 @@ import * as SplashScreen from 'expo-splash-screen'
 import { useCallback, useEffect, useState } from 'react'
 import BottomTabNavigation from './navigation/BottomTabNavigation'
 import {
+    CanIDonate,
     DonationRequest,
     GetStarted,
     Home,
@@ -14,7 +15,8 @@ import {
     OnboardingStarter,
     Register,
     ResetPassword,
-    SuccessVerification,
+    SeeMore,
+    SuccessVerification
 } from './screens'
 import Campaign from './screens/Campaign'
 
@@ -133,6 +135,20 @@ export default function App() {
                 <Stack.Screen
                     name="DonationRequest"
                     component={DonationRequest}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="CanIDonate"
+                    component={CanIDonate}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="SeeMore"
+                    component={SeeMore}
                     options={{
                         headerShown: false,
                     }}

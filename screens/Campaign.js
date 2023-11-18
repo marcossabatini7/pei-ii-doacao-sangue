@@ -8,6 +8,7 @@ import Button from '../components/Button'
 import Input from '../components/Input'
 import PageContainer from '../components/PageContainer'
 import { COLORS, FONTS } from '../constants'
+import { BASE_URL } from "../constants/api"
 import { validateInput } from '../utils/actions/campaignFormActions'
 import { reducer } from '../utils/reducers/formReducers'
 
@@ -48,31 +49,39 @@ const Campaign = ({ navigation }) => {
 
         const user = JSON.parse(await AsyncStorage.getItem('user'))
 
+        if (!user) {
+            navigation.navigate('Login')
+        }
+
         startTransition(() => {
-            fetch('http://10.3.152.15:8080/api/campaign', {
+            fetch(`${BASE_URL}/api/v1/campaign`, {
                 method: 'post',
                 body: JSON.stringify({
                     name: formState?.inputValues?.name,
-                    bloodType: formState?.inputValues?.bloodType,
+                    bloodType: formState?.inputValues?.bloodType.toUpperCase(),
                     phoneNumber: formState?.inputValues?.phoneNumber,
                     location: formState?.inputValues?.location,
                     userId: user.id
                 }),
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${user?.token}`
                 }
             })
                 .then(async (r) => {
-                    const { data, message } = await r.json()
-                    console.log(JSON.stringify(data, null, 2))
+                    const { data, errors, message } = await r.json()
+
                     if (r.ok) {
-                        setCampaign(data.campaign)
+                        setCampaign(data?.campaign)
                         ToastAndroid.show(message ?? 'Campanha criada com sucesso!', ToastAndroid.BOTTOM)
                     }
 
-                    ToastAndroid.show(message ?? 'Erro ao iniciar a campanha', ToastAndroid.BOTTOM)
+                    const errorValidation = errors ? Object.keys(errors).map((k) => errors[k][0]).at(0) : null
+
+                    ToastAndroid.show(errorValidation ?? message ?? 'Erro ao iniciar a campanha', ToastAndroid.BOTTOM)
                 })
                 .catch((e) => {
+                    console.log(e)
                     ToastAndroid.show('Erro ao iniciar a campanha', ToastAndroid.BOTTOM)
                 })
         })

@@ -1,15 +1,16 @@
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useCallback, useEffect, useState, useTransition } from 'react'
 import { Alert, Image, ScrollView, Share, Text, TouchableOpacity, View } from 'react-native'
 import Slideshow from 'react-native-image-slider-show'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
+import differenceInDays from 'date-fns/differenceInDays'
 import Button from '../components/Button'
 import DonationCard from '../components/DonationCard'
-import { COLORS, FONTS, SIZES } from '../constants'
+import { COLORS, FONTS, SIZES, icons } from '../constants'
+import { BASE_URL } from "../constants/api"
 import { categories } from '../constants/data'
-// import { relativeDateFormatter } from "../utils/date"
-import differenceInDays from 'date-fns/differenceInDays'
 
 const bloodTypes = {
     a: '🅰️',
@@ -36,6 +37,27 @@ const Home = ({ navigation }) => {
 
         return () => clearInterval(toggle)
     })
+
+    async function logout() {
+        const user = JSON.parse(await AsyncStorage.getItem('user'))
+
+        if (!user) {
+            navigation.navigate('Login')
+        }
+
+        fetch(`${BASE_URL}/api/v1/logout`, {
+            method: 'post',
+            headers: {
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${user?.token}`
+                }
+            }
+        }).then(async () => {
+            await AsyncStorage.removeItem('user')
+            navigation.navigate('Login')
+        })
+    }
 
     function renderHeader() {
         return (
@@ -136,6 +158,39 @@ const Home = ({ navigation }) => {
                         </Text>
                     </TouchableOpacity>
                 ))}
+                <TouchableOpacity
+                    key='sair'
+                    style={{
+                        height: 120,
+                        width: 110,
+                        borderColor: COLORS.secondaryWhite,
+                        borderWidth: 2,
+                        backgroundColor: COLORS.white,
+                        borderRadius: 10,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginBottom: 22,
+                    }}
+                    onPressIn={() => logout()}
+                >
+                    <Image
+                        source={icons.categoryIcon3}
+                        resizeMode="contain"
+                        style={{
+                            height: 40,
+                            width: 40,
+                            marginVertical: 12,
+                        }}
+                    />
+                    <Text
+                        style={{
+                            ...FONTS.body3,
+                            color: COLORS.secondaryBlack,
+                        }}
+                    >
+                        Sair
+                    </Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -169,23 +224,36 @@ const Home = ({ navigation }) => {
             }
         }
 
-        const fetchCampains = useCallback(() => {
+        const fetchCampains = useCallback(async () => {
+            const userString = await AsyncStorage.getItem('user')
+
+            if (!userString) {
+                navigation.navigate('Login')
+            }
+
+            const user = JSON.parse(userString)
+
             startTransition(() => {
-                fetch(`http://10.3.152.15:8080/api/campaign/${page ?? 1}`, {
+                fetch(`${BASE_URL}/api/v1/campaign?page=${page ?? 1}`, {
                     method: 'get',
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': `Bearer ${user?.token}`
+                    }
                 })
                     .then(async (r) => {
-                        const { data, message } = await r.json()
+                        const { data } = await r.json()
+
                         if (r.ok) {
-                            setPage((p) => p + 1)
                             setCampaigns((c) => [...c, ...data])
+                            setPage((p) => p + 1)
                         }
                     })
                     .catch((e) => {
-
+                        console.log(e)
                     })
             })
-        }, [page, setPage, setCampaigns])
+        }, [page, setCampaigns])
 
         useEffect(() => {
             fetchCampains()
@@ -206,10 +274,7 @@ const Home = ({ navigation }) => {
                 >Últimas campanhas</Text>
                 {!isPending && campaigns?.length ? <>
                     {campaigns?.map((c) => {
-                        console.log(new Date())
-                        console.log(new Date(c.createdAt))
-                        console.log('---')
-                        const postedDate = differenceInDays(new Date(), new Date(c.createdAt));
+                        const postedDate = differenceInDays(new Date(), new Date(c.created_at));
 
                         return (<DonationCard
                             key={c?.id}

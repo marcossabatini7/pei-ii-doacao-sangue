@@ -8,6 +8,7 @@ import Button from '../components/Button'
 import Input from '../components/Input'
 import PageContainer from '../components/PageContainer'
 import { COLORS, FONTS, images } from '../constants'
+import { BASE_URL } from "../constants/api"
 import { validateInput } from '../utils/actions/formActions'
 import { reducer } from '../utils/reducers/formReducers'
 
@@ -36,13 +37,11 @@ const Login = ({ navigation }) => {
             return ToastAndroid.show('Formulário inválido!', ToastAndroid.BOTTOM)
         }
 
-        const user = JSON.parse(await AsyncStorage.getItem('user'))
-
         startTransition(() => {
-            fetch('http://10.3.152.15:8080/api/auth/login', {
+            fetch(`${BASE_URL}/api/v1/auth/login`, {
                 method: 'post',
                 body: JSON.stringify({
-                    username: formState?.inputValues?.email,
+                    email: formState?.inputValues?.email,
                     password: formState?.inputValues?.password
                 }),
                 headers: {
@@ -50,17 +49,18 @@ const Login = ({ navigation }) => {
                 }
             })
                 .then(async (r) => {
-                    const { data, message } = await r.json()
-                    console.log(JSON.stringify(data, null, 2))
+                    const { data: { user }, message } = await r.json()
+
                     if (r.ok) {
-                        await AsyncStorage.setItem('user', JSON.stringify(data))
+                        await AsyncStorage.setItem('user', JSON.stringify(user))
                         ToastAndroid.show(message ?? 'Login realizado com sucesso!', ToastAndroid.BOTTOM)
                         navigation.navigate('Home')
                     }
 
-                    ToastAndroid.show(message ?? 'Erro ao realizar o login', ToastAndroid.BOTTOM)
+                    ToastAndroid.show(message, ToastAndroid.BOTTOM)
                 })
                 .catch((e) => {
+                    console.log(e)
                     ToastAndroid.show('Erro ao realizar o login', ToastAndroid.BOTTOM)
                 })
         })
@@ -73,8 +73,8 @@ const Login = ({ navigation }) => {
                 navigation.navigate('Home')
             }
         })
-        navigation.navigate('Home')
-    }, [AsyncStorage, navigation])
+        // navigation.navigate('Home')
+    }, [navigation])
 
     return (
         <SafeAreaView
@@ -105,9 +105,6 @@ const Login = ({ navigation }) => {
                             alignItems: 'center',
                         }}
                     >
-                        <Text style={{ ...FONTS.h1, color: COLORS.primary }}>
-                            Dare
-                        </Text>
                         <Text
                             style={{
                                 ...FONTS.h1,
@@ -115,10 +112,10 @@ const Login = ({ navigation }) => {
                                 marginHorizontal: 8,
                             }}
                         >
-                            To
+                            Doe
                         </Text>
                         <Text style={{ ...FONTS.h1, color: COLORS.primary }}>
-                            Donate
+                            Sangue
                         </Text>
                     </View>
 

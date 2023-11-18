@@ -92,10 +92,10 @@ const Report = ({ navigation }) => {
                             size={24}
                             color={COLORS.primary}
                         />
-                        <Text style={{ ...FONTS.body4 }}>Research Center</Text>
+                        <Text style={{ ...FONTS.body4 }}>Laboratório</Text>
                     </View>
                     <Text style={{ ...FONTS.body4, marginVertical: 10 }}>
-                        Djaka Medical College, Dhaka
+                        Laboratório teste, Vitória
                     </Text>
                 </View>
 
@@ -127,7 +127,7 @@ const Report = ({ navigation }) => {
                 />
 
                 <Button
-                    title="My Report"
+                    title="Meu relatório"
                     filled
                     style={{
                         marginTop: SIZES.padding,
