@@ -92,7 +92,7 @@ const ResetPassword = ({ navigation }) => {
                         Sua redefinição de senha será enviada no seu e-mail cadastrado
                     </Text>
                     <Button
-                        title="SEND"
+                        title="ENVIAR"
                         filled
                         onPress={() => navigation.navigate('OTPVerification')}
                         style={{

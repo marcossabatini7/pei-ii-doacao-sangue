@@ -40,7 +40,7 @@ export const donors = [
         id: '6',
         image: images.logo,
         name: 'Lucas Enzo',
-        location: 'Mohammedpur, Dhaka',
+        location: 'Vitória',
         bloodType: 'B+',
     },
 ]
