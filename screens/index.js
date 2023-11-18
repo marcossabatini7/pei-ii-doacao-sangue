@@ -1,27 +1,20 @@
+import CanIDonate from './CanIDonate'
+import DonationRequest from './DonationRequest'
 import GetStarted from './GetStarted'
 import Home from './Home'
 import Login from './Login'
-import OnboardingStarter from './OnboardingStarter'
 import OTPVerification from './OTPVerification'
-import Register from './Register'
-import ResetPassword from './ResetPassword'
-import SuccessVerification from './SuccessVerification'
+import OnboardingStarter from './OnboardingStarter'
 import Profile from './Profile'
-import Search from './Search'
-import DonationRequest from './DonationRequest'
+import Register from './Register'
 import Report from './Report'
+import ResetPassword from './ResetPassword'
+import Search from './Search'
+import SeeMore from './SeeMore'
+import SuccessVerification from './SuccessVerification'
 
 export {
-    GetStarted,
+    CanIDonate, DonationRequest, GetStarted,
     Home,
-    Login,
-    OnboardingStarter,
-    OTPVerification,
-    Register,
-    ResetPassword,
-    SuccessVerification,
-    Profile,
-    Search,
-    DonationRequest,
-    Report,
+    Login, OTPVerification, OnboardingStarter, Profile, Register, Report, ResetPassword, Search, SeeMore, SuccessVerification
 }

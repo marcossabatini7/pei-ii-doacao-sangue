@@ -1,15 +1,23 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { COLORS, FONTS, SIZES, icons } from '../constants'
-import { Image } from 'react-native'
-import { TouchableOpacity } from 'react-native'
+
+const bloodIcons = {
+    'a+': icons.aplusIcon,
+    'a-': icons.aminusIcon,
+    'b+': icons.bplusIcon,
+    'b-': icons.bminusIcon,
+    'ab+': icons.abplusIcon,
+    'ab-': icons.abminusIcon,
+    'o+': icons.oplusIcon,
+    'o-': icons.ominusIcon,
+}
 
 const DonationCard = (props) => {
     return (
         <View
             style={{
                 width: SIZES.width - 44,
-                height: 148,
+                height: 115,
                 borderRadius: SIZES.padding,
                 backgroundColor: COLORS.white,
                 flexDirection: 'row',
@@ -36,7 +44,7 @@ const DonationCard = (props) => {
                         marginVertical: 2,
                     }}
                 >
-                    Name
+                    Nome
                 </Text>
                 <Text
                     style={{
@@ -47,28 +55,27 @@ const DonationCard = (props) => {
                 >
                     {props.name}
                 </Text>
-                <Text
-                    style={{
-                        fontSize: 14,
-                        color: COLORS.secondaryBlack,
-                        marginVertical: 2,
-                    }}
-                >
-                    Location
-                </Text>
-                <Text
-                    style={{
-                        fontSize: 14,
-                        color: COLORS.black,
-                        fontWeight: 500,
-                        marginVertical: 2,
-                    }}
-                >
-                    {props.location}
-                </Text>
-                <Text style={{ ...FONTS.body4, color: COLORS.black }}>
-                    {props.postedDate}
-                </Text>
+                {props?.location ? <>
+                    <Text
+                        style={{
+                            fontSize: 14,
+                            color: COLORS.secondaryBlack,
+                            marginVertical: 2,
+                        }}
+                    >
+                        Local
+                    </Text>
+                    <Text
+                        style={{
+                            fontSize: 14,
+                            color: COLORS.black,
+                            fontWeight: 500,
+                            marginVertical: 2,
+                        }}
+                    >
+                        {props.location}
+                    </Text>
+                </> : null}
             </View>
 
             <View
@@ -78,7 +85,7 @@ const DonationCard = (props) => {
                 }}
             >
                 <Image
-                    source={icons.bplusIcon}
+                    source={bloodIcons[props.bloodType]}
                     resizeMode="contain"
                     style={{
                         marginBottom: 32,
@@ -92,7 +99,7 @@ const DonationCard = (props) => {
                             color: COLORS.primary,
                         }}
                     >
-                        Donate
+                        Solicitar
                     </Text>
                 </TouchableOpacity>
             </View>

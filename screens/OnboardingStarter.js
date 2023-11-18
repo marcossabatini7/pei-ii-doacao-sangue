@@ -5,16 +5,14 @@ import Onboarding from 'react-native-onboarding-swiper'
 const Dots = ({ selected }) => {
     let backgroundColor
     backgroundColor = selected ? '#ff2156' : '#808080'
-    return (
-        <View
-            style={{
-                height: 5,
-                width: 5,
-                marginHorizontal: 3,
-                backgroundColor,
-            }}
-        />
-    )
+    return (<View
+        style={{
+            height: 5,
+            width: 5,
+            marginHorizontal: 3,
+            backgroundColor,
+        }}
+    />)
 }
 
 const Done = ({ ...props }) => (
@@ -24,7 +22,7 @@ const Done = ({ ...props }) => (
         }}
         {...props}
     >
-        <Text style={{ color: '#ff2156' }}>Done</Text>
+        <Text style={{ color: '#ff2156' }}>Finalizar</Text>
     </TouchableOpacity>
 )
 
@@ -46,7 +44,7 @@ const OnboardingStarter = ({ navigation }) => {
                     ),
                     title: 'Encontre doadores',
                     subtitle:
-                        'Lorem ipsum dolor set maet Lorem ipsum dolor set maet Lorem ipsum dolor set maet ',
+                        'Crie uma campanha e anuncie sua necessidade por doações',
                 },
                 {
                     backgroundColor: '#fff',
@@ -57,7 +55,7 @@ const OnboardingStarter = ({ navigation }) => {
                     ),
                     title: 'Encontre doadores',
                     subtitle:
-                        'Lorem ipsum dolor set maet Lorem ipsum dolor set maet Lorem ipsum dolor set maet ',
+                        'Ou busque por doadores pelo tipo sanguíneo desejado',
                 },
             ]}
         />

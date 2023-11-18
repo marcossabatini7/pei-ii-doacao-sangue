@@ -2,7 +2,14 @@ const actionUndoIcon = require('../assets/icons/action_undo_icon.png')
 const arrowLeft = require('../assets/icons/arrow_left.png')
 const arrowRight = require('../assets/icons/arrow_right.png')
 const bloodIcon = require('../assets/icons/blood_icon.png')
+const aplusIcon = require('../assets/icons/aplus_icon.png')
+const aminusIcon = require('../assets/icons/aminus_icon.png')
 const bplusIcon = require('../assets/icons/bplus_icon.png')
+const bminusIcon = require('../assets/icons/bminus_icon.png')
+const abplusIcon = require('../assets/icons/abplus_icon.png')
+const abminusIcon = require('../assets/icons/abminus_icon.png')
+const oplusIcon = require('../assets/icons/oplus_icon.png')
+const ominusIcon = require('../assets/icons/ominus_icon.png')
 const categoryIcon1 = require('../assets/icons/category_icon1.png')
 const categoryIcon2 = require('../assets/icons/category_icon2.png')
 const categoryIcon3 = require('../assets/icons/category_icon3.png')
@@ -33,7 +40,14 @@ export default {
     arrowLeft,
     arrowRight,
     bloodIcon,
+    aplusIcon,
+    aminusIcon,
     bplusIcon,
+    bminusIcon,
+    abplusIcon,
+    abminusIcon,
+    oplusIcon,
+    ominusIcon,
     categoryIcon1,
     categoryIcon2,
     categoryIcon3,

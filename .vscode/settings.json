@@ -1,0 +1,13 @@
+{
+    "eslint.experimental.useFlatConfig": true,
+    "eslint.runtime": "bun",
+    "eslint.execArgv": [
+        "--bun"
+    ],
+    "eslint.trace.server": "messages",
+    "eslint.workingDirectories": [
+        {
+            "mode": "auto"
+        }
+    ]
+}

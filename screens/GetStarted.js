@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import React from 'react'
 import { Image, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -6,6 +7,20 @@ import PageContainer from '../components/PageContainer'
 import { COLORS, FONTS, SIZES, images } from '../constants'
 
 const GetStarted = ({ navigation }) => {
+    async function login() {
+        const user = await AsyncStorage.getItem('user')
+
+        if (user) {
+            navigation.navigate('Home')
+            return
+        }
+        navigation.navigate('Login')
+    }
+
+    async function register() {
+        navigation.navigate('Register')
+    }
+
     return (<SafeAreaView style={{ flex: 1 }}>
         <PageContainer>
             <View
@@ -29,9 +44,6 @@ const GetStarted = ({ navigation }) => {
                         alignItems: 'center',
                     }}
                 >
-                    <Text style={{ ...FONTS.h1, color: COLORS.primary }}>
-                        Dare
-                    </Text>
                     <Text
                         style={{
                             ...FONTS.h1,
@@ -39,10 +51,10 @@ const GetStarted = ({ navigation }) => {
                             marginHorizontal: 8,
                         }}
                     >
-                        To
+                        Doe
                     </Text>
                     <Text style={{ ...FONTS.h1, color: COLORS.primary }}>
-                        Donate
+                        Sangue
                     </Text>
                 </View>
 
@@ -58,15 +70,15 @@ const GetStarted = ({ navigation }) => {
                 </View>
                 <Button
                     title="LOGIN"
-                    onPress={() => navigation.navigate('Login')}
+                    onPress={login}
                     style={{
                         width: '100%',
                         marginBottom: SIZES.padding,
                     }}
                 />
                 <Button
-                    title="REGISTER"
-                    onPress={() => navigation.navigate('Register')}
+                    title="REGISTRAR"
+                    onPress={register}
                     filled
                     style={{
                         width: '100%',

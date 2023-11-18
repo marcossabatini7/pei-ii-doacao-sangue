@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String     @id @default(uuid())
+  name         String
+  username     String     @unique
+  email        String     @unique
+  salt         String
+  hash         String
+  phoneNumber  String     @map("phone_number")
+  summary      String?
+  links        Json?
+  location     Json?
+  bloodType    String?    @map("blood_type")
+  profileImage String?    @map("profile_image")
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  Campaign     Campaign[]
+
+  @@map("users")
+}
+
+model Campaign {
+  id             String   @id @default(uuid())
+  name           String
+  phoneNumber    String   @map("phone_number")
+  bloodType      String   @map("blood_type")
+  location       String
+  user           User     @relation(fields: [userId], references: [id])
+  expirationDate DateTime @map("expiration_date")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+
+  @@map("campaigns")
+}

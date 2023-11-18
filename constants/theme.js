@@ -10,6 +10,8 @@ export const COLORS = {
     secondaryBlack: '#595959',
     gray: 'F8F8F8',
     secondaryGray: '#808080',
+    subtitle: '#5E0016',
+    cardBorder: '#CED1D5'
 }
 
 export const SIZES = {
@@ -32,6 +34,9 @@ export const SIZES = {
     body3: 14,
     body4: 14,
     body5: 12,
+    subtitle: 25,
+    paragraph: 16,
+    topic: 16,
 
     // app dimensions
     width,
@@ -52,6 +57,9 @@ export const FONTS = {
     body2: { fontFamily: 'regular', fontSize: SIZES.body2, lineHeight: 30 },
     body3: { fontFamily: 'regular', fontSize: SIZES.body3, lineHeight: 22 },
     body4: { fontFamily: 'regular', fontSize: SIZES.body4, lineHeight: 20 },
+    subtitle: { fontFamily: 'bold', fontSize: SIZES.subtitle, lineHeight: 32 },
+    paragraph: { fontFamily: 'regular', fontSize: SIZES.paragraph, lineHeight: 20 },
+    topic: { fontFamily: 'bold', fontSize: SIZES.topic, lineHeight: 20 },
 }
 
 const appTheme = { COLORS, SIZES, FONTS }
